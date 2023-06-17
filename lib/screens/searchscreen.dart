@@ -44,7 +44,8 @@ class _SearchScreenState extends State<SearchScreen> {
       Future.delayed(const Duration(seconds: 2), () {
         List<String> newImages = List.generate(
           21,
-          (index) => 'https://img.freepik.com/free-photo/blossom-floral-bouquet-decoration-colorful-beautiful-flowers-background-garden-flowers-plant-pattern-wallpapers-greeting-cards-postcards-design-wedding-invites_90220-1103.jpg',
+          (index) =>
+              'https://img.freepik.com/free-photo/blossom-floral-bouquet-decoration-colorful-beautiful-flowers-background-garden-flowers-plant-pattern-wallpapers-greeting-cards-postcards-design-wedding-invites_90220-1103.jpg',
         );
 
         setState(() {
@@ -58,52 +59,59 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+  padding: const EdgeInsets.only(top: 20, bottom: 10, right: 20, left: 10),
+  child: Container(
+    height: 40.0, // Adjust the height as needed
+    child: TextField(
+      decoration: InputDecoration(
+        hintText: 'Search',
+        prefixIcon: const Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+    ),
+  ),
+),
+
+            Expanded(
+              child: GridView.builder(
+                controller: _scrollController,
+                itemCount: _imageList.length + 1,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 1.0,
+                  crossAxisSpacing: 1.0,
                 ),
+                itemBuilder: (context, index) {
+                  if (index < _imageList.length) {
+                    return Image.network(
+                      _imageList[index],
+                      fit: BoxFit.cover,
+                    );
+                  } else if (_isLoading) {
+                    return const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
               ),
             ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              controller: _scrollController,
-              itemCount: _imageList.length + 1,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 5.0,
-                crossAxisSpacing: 5.0,
-              ),
-              itemBuilder: (context, index) {
-                if (index < _imageList.length) {
-                  return Image.network(
-                    _imageList[index],
-                    fit: BoxFit.cover,
-                  );
-                } else if (_isLoading) {
-                  return const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

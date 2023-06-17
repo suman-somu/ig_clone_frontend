@@ -3,11 +3,11 @@ import '../models/PostModel.dart';
 List<Post> posts = [
   Post(
     username: 'john_doe',
-    image: 'assets/images/about.png',
+    image: 'assets/exampleImages/instapost1.jpg',
     likes: 150,
     comments: 20,
     shares: 10,
-    caption: 'what is up',
+    caption: 'yo yo yo !!! what is up',
   ),
   Post(
     username: 'jane_smith',
