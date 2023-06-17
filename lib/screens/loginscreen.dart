@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/homepage.dart';
+import 'package:instgram_clone/screens/home/homepage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

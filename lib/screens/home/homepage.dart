@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/home/homefeed.dart';
 import 'package:instgram_clone/screens/profilepage.dart';
 import 'package:instgram_clone/screens/searchscreen.dart';
 
@@ -13,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    const HomeScreen(),
+    const HomeFeed(),
     const SearchScreen(),
     const AddPostScreen(),
     const NotificationsScreen(),
@@ -76,34 +77,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// Placeholder screens for demonstration
-// (Same as previous code)
-
-// Placeholder screens for demonstration
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Instagram",
-          style: TextStyle(
-            fontFamily: 'Cookie',
-            fontWeight: FontWeight.w500,
-            fontSize: 35,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
-      body: const Center(
-        child: Text('Home Screen'),
       ),
     );
   }
