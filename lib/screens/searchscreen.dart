@@ -43,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
       Future.delayed(const Duration(seconds: 2), () {
         List<String> newImages = List.generate(
-          10,
+          21,
           (index) => 'https://img.freepik.com/free-photo/blossom-floral-bouquet-decoration-colorful-beautiful-flowers-background-garden-flowers-plant-pattern-wallpapers-greeting-cards-postcards-design-wedding-invites_90220-1103.jpg',
         );
 
@@ -76,9 +76,14 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
+            child: GridView.builder(
               controller: _scrollController,
               itemCount: _imageList.length + 1,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 5.0,
+                crossAxisSpacing: 5.0,
+              ),
               itemBuilder: (context, index) {
                 if (index < _imageList.length) {
                   return Image.network(
@@ -87,7 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 } else if (_isLoading) {
                   return const Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(5.0),
                     child: Center(
                       child: CircularProgressIndicator(),
                     ),

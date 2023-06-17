@@ -24,44 +24,65 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: '',
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          // Set the desired height of the bottom navigation bar
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          canvasColor: Colors.white,
+          primaryColor: Colors.black,
+          textTheme: Theme.of(context).textTheme.copyWith(
+                bodySmall: const TextStyle(fontSize: 0),
+              ),
+          primaryIconTheme: const IconThemeData(
+            size: 24,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: '',
+          iconTheme: const IconThemeData(
+            size: 24,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            activeIcon: Icon(Icons.add_box),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            activeIcon: Icon(Icons.notifications),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined),
-            activeIcon: Icon(Icons.person_2),
-            label: '',
-          ),
-        ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined),
+              activeIcon: Icon(Icons.add_box),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_outlined),
+              activeIcon: Icon(Icons.notifications),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_outlined),
+              activeIcon: Icon(Icons.person_2),
+              label: '',
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+// Placeholder screens for demonstration
+// (Same as previous code)
 
 // Placeholder screens for demonstration
 class HomeScreen extends StatelessWidget {
@@ -71,7 +92,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text(
+          "Instagram",
+          style: TextStyle(
+            fontFamily: 'Cookie',
+            fontWeight: FontWeight.w500,
+            fontSize: 35,
+            letterSpacing: 1,
+          ),
+        ),
       ),
       body: const Center(
         child: Text('Home Screen'),

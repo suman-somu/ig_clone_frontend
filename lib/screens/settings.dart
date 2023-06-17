@@ -72,8 +72,11 @@ class SettingsPage extends StatelessWidget {
                 child: Image.asset('assets/images/logout.png')),
             title: const Text('Log Out'),
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: ((context) => const LoginScreen())));
+                  Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: ( context) =>
+                                  const LoginScreen()));
             },
           ),
         ],
