@@ -8,19 +8,30 @@ class HomeFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List posts = getPosts();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Instagram",
-          style: TextStyle(
-            fontFamily: 'Cookie',
-            fontWeight: FontWeight.w500,
-            fontSize: 35,
-            letterSpacing: 1,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Instagram",
+              style: TextStyle(
+                fontFamily: 'Cookie',
+                fontWeight: FontWeight.w500,
+                fontSize: 35,
+                letterSpacing: 1,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: SizedBox(
+                height: 25,
+                child: Image.asset('assets/images/messages.png'),
+              ),
+            ),
+          ],
         ),
       ),
       body: Padding(
