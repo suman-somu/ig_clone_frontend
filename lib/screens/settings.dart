@@ -72,6 +72,7 @@ class SettingsPage extends StatelessWidget {
                 child: Image.asset('assets/images/logout.png')),
             title: const Text('Log Out'),
             onTap: () {
+              Navigator.popUntil(context, (route) => route.isFirst);
                   Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
