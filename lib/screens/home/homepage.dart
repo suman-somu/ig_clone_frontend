@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/picker_page.dart';
 import 'package:instgram_clone/screens/home/homefeed.dart';
 import 'package:instgram_clone/screens/profilepage.dart';
 import 'package:instgram_clone/screens/searchscreen.dart';
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeFeed(),
     const SearchScreen(),
-    const AddPostScreen(),
+    const PickerPage(),
     const NotificationsScreen(),
     const ProfilePage(),
   ];
@@ -77,22 +78,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AddPostScreen extends StatelessWidget {
-  const AddPostScreen({Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Post'),
-      ),
-      body: const Center(
-        child: Text('Add Post Screen'),
       ),
     );
   }
