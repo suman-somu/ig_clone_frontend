@@ -1,33 +1,28 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 var url = 'localhost:8080';
 var refreshToken='';
-main() async{
-  // signupService();
-  await login();
-  logout();
-}
 
-void signupService() async {
+void signupService(String username, String email, String password) async {
   var uri = Uri.http(url, 'api/user/signup');
   var response = await http.post(uri, body: {
-    'username': 'Suman',
-    'email': 'sumansahoo943@gmail.com',
-    'password': 'suman123'
+    'username': username,
+    'email': email,
+    'password': password
   });
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 }
 
-Future<void> login() async {
+Future<http.Response> login(String username, String password) async {
   var uri = Uri.http(url, 'api/user/login');
   var response =
-      await http.post(uri, body: {'username': 'Suman', 'password': 'suman123'});
+      await http.post(uri, body: {'username': username, 'password': password});
   print('Response status: ${response.statusCode}');
-  refreshToken = json.decode(response.body)['refreshToken'];
+  // refreshToken = json.decode(response.body)['refreshToken'];
   // print(refreshToken);
   print('Response body: ${response.body}');
+  return response;
 }
 
 void logout () async {

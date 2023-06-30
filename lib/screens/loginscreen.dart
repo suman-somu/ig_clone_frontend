@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/home/homepage.dart';
 
+import '../services/login_service.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -9,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 100.0),
                 TextFormField(
+                  controller: usernameController,
                   decoration: InputDecoration(
                     hintText: 'Username, email address or mobile number',
                     enabledBorder: OutlineInputBorder(
@@ -48,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     hintText: 'Password',
                     enabledBorder: OutlineInputBorder(
@@ -71,12 +78,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48.0,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
+                    onPressed: () async {
+                      print(usernameController.text);
+                      print(passwordController.text);
+                      var response = await login(
+                          usernameController.text, passwordController.text);
+
+                      if (response.statusCode == 200) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const HomePage()));
+                            builder: (BuildContext context) => const HomePage(),
+                          ),
+                        );
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "${response.body}",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.black87,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0064E0),
