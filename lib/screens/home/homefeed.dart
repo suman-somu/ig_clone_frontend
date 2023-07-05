@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/services/feedService.dart';
+import 'package:instgram_clone/services/fake_feed_service.dart';
 
 import '../../widgets/PostWidget.dart';
 
