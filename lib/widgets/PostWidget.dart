@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 import '../models/PostModel.dart';
 
@@ -47,11 +48,19 @@ class _PostWidgetState extends State<PostWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          AspectRatio(
-            aspectRatio: 4 / 5,
-            child: Image.asset(
-              widget.post.image,
-              fit: BoxFit.cover,
+          ZoomOverlay(
+            animationCurve: Curves.fastOutSlowIn,
+            animationDuration: const Duration(milliseconds: 300),
+            modalBarrierColor: Colors.black.withOpacity(0.5),
+            twoTouchOnly: true,
+            onScaleStart: () {},
+            onScaleStop: () {},
+            child: AspectRatio(
+              aspectRatio: 4 / 5,
+              child: Image.asset(
+                widget.post.image,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(height: 5.0),
@@ -71,7 +80,7 @@ class _PostWidgetState extends State<PostWidget> {
                 isSelected: selected,
                 icon: const Icon(Icons.favorite_border),
                 selectedIcon: const Icon(Icons.favorite),
-                color: (selected)? Colors.redAccent: Colors.black,
+                color: (selected) ? Colors.redAccent : Colors.black,
               ),
               IconButton(
                 onPressed: () {},
