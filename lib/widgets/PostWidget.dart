@@ -49,6 +49,7 @@ class _PostWidgetState extends State<PostWidget> {
           ),
           const SizedBox(height: 8.0),
           ZoomOverlay(
+            minScale: 0.8,
             animationCurve: Curves.fastOutSlowIn,
             animationDuration: const Duration(milliseconds: 300),
             modalBarrierColor: Colors.black.withOpacity(0.5),
