@@ -1,4 +1,4 @@
-class Post {
+class Feed {
   final String username;
   final String image;
   final int likes;
@@ -6,7 +6,7 @@ class Post {
   final int shares;
   final String caption;
 
-  Post( {
+  Feed( {
     required this.username,
     required this.image,
     required this.likes,

@@ -1,7 +1,7 @@
-import '../models/PostModel.dart';
+import '../models/FeedModel.dart';
 
-List<Post> posts = [
-  Post(
+List<Feed> feed = [
+  Feed(
     username: 'john_doe',
     image: 'assets/exampleImages/instapost1.jpg',
     likes: 150,
@@ -9,7 +9,7 @@ List<Post> posts = [
     shares: 10,
     caption: 'yo yo yo !!! what is up',
   ),
-  Post(
+  Feed(
     username: 'jane_smith',
     image: 'assets/exampleImages/instapost1.jpg',
     likes: 200,
@@ -20,6 +20,6 @@ List<Post> posts = [
   // Add more posts here
 ];
 
-List<Post> getPosts() {
-  return posts;
+List<Feed> getFeed() {
+  return feed;
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
-import '../models/PostModel.dart';
+import '../models/FeedModel.dart';
 
 class PostWidget extends StatefulWidget {
-  final Post post;
+  final Feed feed;
 
-  const PostWidget({super.key, required this.post});
+  const PostWidget({super.key, required this.feed});
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -37,7 +37,7 @@ class _PostWidgetState extends State<PostWidget> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Text(
-                    widget.post.username,
+                    widget.feed.username,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -59,7 +59,7 @@ class _PostWidgetState extends State<PostWidget> {
             child: AspectRatio(
               aspectRatio: 4 / 5,
               child: Image.asset(
-                widget.post.image,
+                widget.feed.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -99,7 +99,7 @@ class _PostWidgetState extends State<PostWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  widget.post.likes.toString(),
+                  widget.feed.likes.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -120,13 +120,13 @@ class _PostWidgetState extends State<PostWidget> {
                 style: DefaultTextStyle.of(context).style,
                 children: [
                   TextSpan(
-                    text: widget.post.username,
+                    text: widget.feed.username,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const WidgetSpan(child: SizedBox(width: 10)),
-                  TextSpan(text: widget.post.caption),
+                  TextSpan(text: widget.feed.caption),
                 ],
               ),
             ),

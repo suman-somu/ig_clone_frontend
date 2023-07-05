@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/services/postsservice.dart';
+import 'package:instgram_clone/services/feedService.dart';
 
 import '../../widgets/PostWidget.dart';
 
@@ -8,7 +8,7 @@ class HomeFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List posts = getPosts();
+    List posts = getFeed();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +39,7 @@ class HomeFeed extends StatelessWidget {
         child: ListView.builder(
           itemCount: posts.length,
           itemBuilder: (context, index) {
-            return PostWidget(post: posts[index]);
+            return PostWidget(feed: posts[index]);
           },
         ),
       ),
