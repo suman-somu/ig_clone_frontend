@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/services/fake_feed_service.dart';
-
+import '../../services/feedService.dart';
 import '../../widgets/PostWidget.dart';
 
 class HomeFeed extends StatelessWidget {
