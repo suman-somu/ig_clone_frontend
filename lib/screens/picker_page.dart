@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:insta_assets_picker/insta_assets_picker.dart';
+import 'package:instgram_clone/services/post_service.dart';
 
 import '../widgets/cropresultsview.dart';
 import 'home/homepage.dart';
@@ -72,9 +73,6 @@ class _PickerPageState extends State<PickerPage> {
       },
     );
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +153,7 @@ class PickerCaptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var captionController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Post'),
@@ -167,7 +166,8 @@ class PickerCaptionScreen extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            onPressed: () {
+            onPressed: () async {
+              await postImageEvent(croppedFiles, captionController);
               Navigator.pushReplacement<void, void>(
                 context,
                 MaterialPageRoute<void>(
@@ -193,6 +193,7 @@ class PickerCaptionScreen extends StatelessWidget {
                   const SizedBox(width: 20),
                   Expanded(
                     child: TextFormField(
+                      controller: captionController,
                       maxLength: 2200,
                       maxLines: 100,
                       decoration: const InputDecoration(
@@ -256,5 +257,9 @@ class PickerCaptionScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  Future<void> postImageEvent(List<File> imagelist, TextEditingController caption) async {
+    postImage(imagelist, caption.text);
   }
 }
