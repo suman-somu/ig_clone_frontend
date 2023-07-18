@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../services/feedService.dart';
+import '../../services/feed_service.dart';
 import '../../widgets/PostWidget.dart';
 
 class HomeFeed extends StatelessWidget {
