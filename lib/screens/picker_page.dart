@@ -168,12 +168,12 @@ class PickerCaptionScreen extends StatelessWidget {
             ),
             onPressed: () async {
               await postImageEvent(croppedFiles, captionController);
-              Navigator.pushReplacement<void, void>(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const HomePage(),
-                ),
-              );
+              Navigator.popUntil(context, (route) => route.isFirst);
+                  Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: ( context) =>
+                                  const HomePage()));
             },
           ),
         ],
