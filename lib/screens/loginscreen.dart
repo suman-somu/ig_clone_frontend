@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/home/homepage.dart';
+import 'package:instgram_clone/screens/signup/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/login_service.dart';
 
@@ -14,6 +16,32 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  savedLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var username = prefs.getString('username');
+    var accessToken = prefs.getString('accessToken');
+    if (username != null && accessToken != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    savedLogin().then((value) {
+      if (value == true) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const HomePage(),
+          ),
+        );
+      }
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,32 +106,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48.0,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      print(usernameController.text);
-                      print(passwordController.text);
-                      var response = await login(
-                          usernameController.text, passwordController.text);
+                    onPressed: () async {             
+                      // print(usernameController.text);
+                      // print(passwordController.text);
+                          var response = await login(
+                              usernameController.text, passwordController.text);
 
-                      if (response.statusCode == 200) {
-                        // ignore: use_build_context_synchronously
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => const HomePage(),
-                          ),
-                        );
-                      } else {
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              "${response.body}",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Colors.black87,
-                          ),
-                        );
-                      }
+                          if (response.statusCode == 200) {
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => const HomePage(),
+                              ),
+                            );
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "${response.body}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.black87,
+                              ),
+                            );
+                          }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0064E0),
@@ -125,7 +153,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48.0,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const SignupPage(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       foregroundColor: const Color(0xFF0064E0),
