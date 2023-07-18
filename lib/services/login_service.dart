@@ -37,14 +37,16 @@ Future<http.Response> login(String username, String password) async {
   return response;
 }
 
-void logout () async {
+Future<void> logout () async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var accessToken = prefs.getString('accessToken');
+
   var uri = Uri.http(url, 'api/user/logout');
-  var response = await http.post(uri, body: {'refreshToken': refreshToken});
+  var response = await http.post(uri, body: {'accessToken': accessToken});
   // print('\nResponse status: ${response.statusCode}');
   // print('Response body: ${response.body}');
 
   if (response.statusCode == 200) {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('username');
     prefs.remove('accessToken');
   }

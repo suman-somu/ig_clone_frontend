@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-var url = 'localhost:8080';
+var url = '192.168.133.144:8080';
 
 // main(){
 //   var image = File('assets/images/about.png');
@@ -12,6 +13,10 @@ var url = 'localhost:8080';
 void postImage(List<File> images, String caption) async {
   var uri = Uri.http(url, 'api/user/post');
   var request = http.MultipartRequest('POST', uri);
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  request.fields['username'] = prefs.getString('username')!;
+  request.fields['accessToken'] = prefs.getString('accessToken')!;
   if(caption.isNotEmpty) {
     request.fields['caption'] = caption;
   }
@@ -27,5 +32,6 @@ void postImage(List<File> images, String caption) async {
     print('Uploaded!');
   } else {
     print('Upload failed with status code: ${response.statusCode}');
+    print(response);
   }
 }

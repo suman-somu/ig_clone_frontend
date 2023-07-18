@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/loginscreen.dart';
 import 'package:instgram_clone/screens/searchscreen.dart';
 
+import '../services/login_service.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -71,7 +73,8 @@ class SettingsPage extends StatelessWidget {
                 width: 30,
                 child: Image.asset('assets/images/logout.png')),
             title: const Text('Log Out'),
-            onTap: () {
+            onTap: () async {
+              await logout();
               Navigator.popUntil(context, (route) => route.isFirst);
                   Navigator.pushReplacement(
                           context,
