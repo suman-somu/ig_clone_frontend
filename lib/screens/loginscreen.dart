@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController useridController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   savedLogin() async {
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 100.0),
                 TextFormField(
-                  controller: usernameController,
+                  controller: useridController,
                   decoration: InputDecoration(
                     hintText: 'Username, email address or mobile number',
                     enabledBorder: OutlineInputBorder(
@@ -110,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // print(usernameController.text);
                       // print(passwordController.text);
                           var response = await login(
-                              usernameController.text, passwordController.text);
+                              useridController.text, passwordController.text);
 
                           if (response.statusCode == 200) {
                             // ignore: use_build_context_synchronously

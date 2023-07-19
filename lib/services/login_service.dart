@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../utils/is_email.dart';
 
 var url = '192.168.133.144:8080';
 
@@ -13,12 +13,11 @@ void signupService(String username, String email, String password) async {
   print('Response body: ${response.body}');
 }
 
-Future<http.Response> login(String username, String password) async {
+Future<http.Response> login(String userid, String password) async {
+
   var uri = Uri.http(url, 'api/user/login');
-  var response =
-      await http.post(uri, body: {'username': username, 'password': password});
-  // print('Response status: ${response.statusCode}');
-  // print('Response body: ${response.body}');
+  var response = (isEmail(userid))? await http.post(uri, body: {'email': userid, 'password': password}) :
+      await http.post(uri, body: {'username': userid, 'password': password});
 
   if (response.statusCode == 200) {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,7 +39,7 @@ Future<void> logout() async {
   var uri = Uri.http(url, 'api/user/logout');
   var response = await http.post(uri, body: {'accessToken': accessToken});
 
-  if(response.statusCode == 200){
+  if (response.statusCode == 200) {
     prefs.remove('username');
     prefs.remove('accessToken');
   }
