@@ -4,15 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 var url = '192.168.133.144:8080';
-var refreshToken='';
 
 void signupService(String username, String email, String password) async {
   var uri = Uri.http(url, 'api/user/signup');
-  var response = await http.post(uri, body: {
-    'username': username,
-    'email': email,
-    'password': password
-  });
+  var response = await http.post(uri,
+      body: {'username': username, 'email': email, 'password': password});
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
 }
@@ -23,7 +19,7 @@ Future<http.Response> login(String username, String password) async {
       await http.post(uri, body: {'username': username, 'password': password});
   // print('Response status: ${response.statusCode}');
   // print('Response body: ${response.body}');
-  
+
   if (response.statusCode == 200) {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var responseBody = json.decode(response.body);
@@ -37,16 +33,14 @@ Future<http.Response> login(String username, String password) async {
   return response;
 }
 
-Future<void> logout () async {
+Future<void> logout() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   var accessToken = prefs.getString('accessToken');
 
   var uri = Uri.http(url, 'api/user/logout');
   var response = await http.post(uri, body: {'accessToken': accessToken});
-  // print('\nResponse status: ${response.statusCode}');
-  // print('Response body: ${response.body}');
 
-  if (response.statusCode == 200) {
+  if(response.statusCode == 200){
     prefs.remove('username');
     prefs.remove('accessToken');
   }

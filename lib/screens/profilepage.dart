@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/settings.dart';
+import 'package:instgram_clone/services/profile_service.dart';
+
+import '../utils/profile_list.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -9,6 +12,34 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var nameofuser = '';
+  var profilepicture = '';
+  var noofposts = '';
+  var followerscount = '';
+  var followingcount = '';
+  var bio = '';
+  var postsidlist = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    callprofileservice();
+  }
+
+  callprofileservice() async {
+    Map<String,String> profileinfo = await profileservice();
+    setState(() {
+      nameofuser = profileinfo['nameofuser']!;
+      profilepicture = profileinfo['profilepicture']!;
+      noofposts = profileinfo['noofposts']!;
+      followerscount = profileinfo['followerscount']!;
+      followingcount = profileinfo['followingcount']!;
+      bio = profileinfo['bio']!;
+      postsidlist = profileinfo['postsidlist']!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     int selectedImageIndex = 0;
@@ -16,9 +47,9 @@ class _ProfilePageState extends State<ProfilePage> {
     var itemCount = 10;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'John Doe',
-          style: TextStyle(
+        title: Text(
+          (nameofuser == '') ? '...' : nameofuser,
+          style: const TextStyle(
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
           ),
@@ -46,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CircleAvatar(
@@ -54,43 +85,47 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundImage:
                             AssetImage('assets/images/profileimage.png'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Column(
                         children: [
                           Text(
-                            '2',
-                            style: TextStyle(
+                            (noofposts == '') ? '-1' : noofposts.toString(),
+                            style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text('Posts'),
+                          const Text('Posts'),
                         ],
                       ),
                       Column(
                         children: [
                           Text(
-                            '500',
-                            style: TextStyle(
+                            (followerscount == '')
+                                ? '-1'
+                                : followerscount.toString(),
+                            style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text('Followers'),
+                          const Text('Followers'),
                         ],
                       ),
                       Column(
                         children: [
                           Text(
-                            '346',
-                            style: TextStyle(
+                            (followingcount == '')
+                                ? '-1'
+                                : followingcount.toString(),
+                            style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text('Following'),
+                          const Text('Following'),
                         ],
                       ),
                     ],
@@ -109,10 +144,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Pellentesque euismod bibendum odio sit amet efficitur.',
-                    style: TextStyle(fontSize: 16.0),
+                  Text(
+                    (bio == '') ? 'THERE IS NO BIO' : bio,
+                    style: const TextStyle(fontSize: 16.0),
                   ),
                   const SizedBox(
                     height: 40,
