@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../secrets.dart';
 
-var url = '192.168.133.144:8080';
+var url = secrets().url;
 
 Future<Map<String, String>> profileservice() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();

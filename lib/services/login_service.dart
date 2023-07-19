@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:instgram_clone/secrets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/is_email.dart';
 
-var url = '192.168.133.144:8080';
+var url = secrets().url;
 
 void signupService(String username, String email, String password) async {
   var uri = Uri.http(url, 'api/user/signup');
