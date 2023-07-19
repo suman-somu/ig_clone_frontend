@@ -1,9 +1,9 @@
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:instgram_clone/secrets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var url = secrets().url;
+var url = dotenv.env['URL'];
 
 // main(){
 //   var image = File('assets/images/about.png');
@@ -11,7 +11,7 @@ var url = secrets().url;
 // }
 
 void postImage(List<File> images, String caption) async {
-  var uri = Uri.http(url, 'api/user/post');
+  var uri = Uri.http(url!, 'api/user/post');
   var request = http.MultipartRequest('POST', uri);
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();

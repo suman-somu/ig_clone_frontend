@@ -1,16 +1,16 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../secrets.dart';
 
-var url = secrets().url;
+var url = dotenv.env['URL'];
 
 Future<Map<String, String>> profileservice() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   var username = prefs.getString('username');
   var accessToken = prefs.getString('accessToken');
 
-  var uri = Uri.http(url, 'api/user/profile');
+  var uri = Uri.http(url!, 'api/user/profile');
   var response = await http.post(uri, body: {
     'username': username,
     'accessToken': accessToken,
