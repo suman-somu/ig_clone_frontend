@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/search/search_predictions.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -63,25 +64,46 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             Padding(
-  padding: const EdgeInsets.only(top: 20, bottom: 10, right: 20, left: 10),
-  child: Container(
-    height: 40.0, // Adjust the height as needed
-    child: TextField(
-      decoration: InputDecoration(
-        hintText: 'Search',
-        prefixIcon: const Icon(Icons.search),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    ),
-  ),
-),
-
+              padding: const EdgeInsets.only(
+                  top: 20, bottom: 10, right: 20, left: 10),
+              child: Container(
+                height: 40.0, // Adjust the height as needed
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchPrediction(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 40.0,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(width: 10),
+                        Text(
+                          'Search',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: GridView.builder(
                 controller: _scrollController,
