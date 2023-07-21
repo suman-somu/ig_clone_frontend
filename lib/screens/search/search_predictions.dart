@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/services/search_prediction_service.dart';
 
-import '../../models/list.dart';
 
 class SearchPrediction extends StatefulWidget {
   const SearchPrediction({super.key});

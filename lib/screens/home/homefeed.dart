@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import '../../services/feed_service.dart';
 import '../../widgets/PostWidget.dart';
 
@@ -8,6 +9,19 @@ class HomeFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List posts = getFeed();
+
+    RefreshController refreshController =
+        RefreshController(initialRefresh: false);
+
+    void onRefresh() async {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      refreshController.refreshCompleted();
+    }
+
+    void onLoading() async {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      refreshController.loadComplete();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -33,8 +47,12 @@ class HomeFeed extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
+      body: SmartRefresher(
+        controller: refreshController,
+        enablePullDown: true,
+        enablePullUp: true,
+        onRefresh: onRefresh,
+        onLoading: onLoading,
         child: ListView.builder(
           itemCount: posts.length,
           itemBuilder: (context, index) {
