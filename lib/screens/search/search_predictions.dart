@@ -14,8 +14,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
   late FocusNode _focusNode = FocusNode();
   TextEditingController SearchPredictionKeywords = TextEditingController();
 
-  //make a example json response list
-  // List<<PredictionList>> searchPredictionList = [{nameofuser: Suman Sahoo, username: sam, profilePicture: YOUR_DEFAULT_AVATAR_URL}, {nameofuser: Suman Sahoo, username: sumansah00, profilePicture: YOUR_DEFAULT_AVATAR_URL}, {username: sumansahoo, profilePicture: YOUR_DEFAULT_AVATAR_URL}]
+  List<Map<String, String>> searchResults = [];
 
   @override
   void dispose() {
@@ -37,41 +36,60 @@ class SsearchPredictionState extends State<SearchPrediction> {
         child: Padding(
           padding:
               const EdgeInsets.only(top: 20, bottom: 10, right: 20, left: 10),
-          child: Row(
+          child: Column(
             children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: const SizedBox(
-                  width: 40,
-                  height: 20,
-                  child: Icon(Icons.arrow_back_ios_new),
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: TextField(
-                  controller: SearchPredictionKeywords,
-                  autofocus: true, // Automatically open the keyboard
-                  focusNode: _focusNode,
-                  onChanged: (text) {
-                    // if (text.isNotEmpty) {
-                    // }
-                      updatelist();
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    prefixIcon: const Icon(Icons.search),
-                    prefixIconColor: Colors.grey,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const SizedBox(
+                      width: 40,
+                      height: 20,
+                      child: Icon(Icons.arrow_back_ios_new),
                     ),
                   ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: TextField(
+                      controller: SearchPredictionKeywords,
+                      autofocus: true, // Automatically open the keyboard
+                      focusNode: _focusNode,
+                      onChanged: (text) {
+                        updatelist();
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        prefixIcon: const Icon(Icons.search),
+                        prefixIconColor: Colors.grey,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 5.0),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: searchResults.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(searchResults[index]['nameofuser'] ?? ''),
+                      subtitle: Text(searchResults[index]['username'] ?? ''),
+                      leading: CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 255, 0, 85),
+                        backgroundImage: NetworkImage(
+                          searchResults[index]['profilePicture'] ?? '',
+                        ),
+                      ),
+                      onTap: () {},
+                    );
+                  },
                 ),
               ),
             ],
@@ -81,12 +99,25 @@ class SsearchPredictionState extends State<SearchPrediction> {
     );
   }
 
-  updatelist() {
-    String text = SearchPredictionKeywords.text;
-    text = text.trimLeft();
-    text = text.trimRight();
+  Future<void> updatelist() async {
+    String text = SearchPredictionKeywords.text.trim();
     if (text.isNotEmpty) {
-      searchPredictionService(SearchPredictionKeywords.text);
+      var results = await searchPredictionService(text);
+      print("Results = $results");
+
+      // Convert the List<dynamic> to List<Map<String, String>>
+      List<Map<String, String>> typedResults = results.map((dynamic item) {
+        return Map<String, String>.from(item);
+      }).toList();
+      print(typedResults.runtimeType);
+
+      setState(() {
+        searchResults = typedResults;
+      });
+    } else {
+      setState(() {
+        searchResults = [];
+      });
     }
   }
 }

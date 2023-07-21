@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/picker_page.dart';
 import 'package:instgram_clone/screens/home/homefeed.dart';
 import 'package:instgram_clone/screens/profilepage.dart';
-import 'package:instgram_clone/screens/searchscreen.dart';
+import 'package:instgram_clone/screens/search/searchscreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, Key? k});

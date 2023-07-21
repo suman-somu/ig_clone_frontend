@@ -66,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.only(
                   top: 20, bottom: 10, right: 20, left: 10),
-              child: Container(
+              child: SizedBox(
                 height: 40.0, // Adjust the height as needed
                 child: GestureDetector(
                   onTap: () {
