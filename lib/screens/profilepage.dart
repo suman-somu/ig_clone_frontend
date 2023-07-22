@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   callprofileservice() async {
-    Map<String,String> profileinfo = await profileservice();
+    Map<String, String> profileinfo = await profileservice();
     setState(() {
       nameofuser = profileinfo['nameofuser']!;
       profilepicture = profileinfo['profilepicture']!;
@@ -42,7 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedImageIndex = 0;
 
     var itemCount = 10;
     return Scaffold(
@@ -151,65 +150,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedImageIndex = 0;
-                            itemCount = 9;
-                            print("$selectedImageIndex   $itemCount");
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child: Image.asset(
-                                  'assets/images/postsinprofile.png'),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              height: (selectedImageIndex == 0) ? 2 : 1,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedImageIndex = 1;
-                            itemCount = 11;
-                            print("$selectedImageIndex   $itemCount");
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child:
-                                  Image.asset('assets/images/taggedposts.png'),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              height: (selectedImageIndex == 1) ? 2 : 1,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  const Divider(
+                    height: 0,
+                    // thickness: 0.5,
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   GridView.builder(
                     shrinkWrap: true,
