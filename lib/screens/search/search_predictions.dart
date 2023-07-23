@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/search/search_account.dart';
 import 'package:instgram_clone/services/search_prediction_service.dart';
 
 
@@ -86,7 +87,16 @@ class SsearchPredictionState extends State<SearchPrediction> {
                           searchResults[index]['profilePicture'] ?? '',
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        var searchAccountUsername = searchResults[index]['username'].toString();
+                        FocusScope.of(context).unfocus();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchAccount(searchAccountUsername: searchAccountUsername,),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -108,7 +118,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
       List<Map<String, String>> typedResults = results.map((dynamic item) {
         return Map<String, String>.from(item);
       }).toList();
-      print(typedResults.runtimeType);
+      print(typedResults);
 
       setState(() {
         searchResults = typedResults;
