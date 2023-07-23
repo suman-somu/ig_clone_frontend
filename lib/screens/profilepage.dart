@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/settings.dart';
 import 'package:instgram_clone/services/profile_service.dart';
 
-import '../utils/profile_list.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
