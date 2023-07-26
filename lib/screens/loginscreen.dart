@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => const HomePage(),
+            builder: (BuildContext context) =>  HomePage(),
           ),
         );
       }
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (BuildContext context) => const HomePage(),
+                                builder: (BuildContext context) =>  HomePage(),
                               ),
                             );
                           } else {

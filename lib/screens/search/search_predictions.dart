@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/search/search_account.dart';
 import 'package:instgram_clone/services/search_prediction_service.dart';
 
-
 class SearchPrediction extends StatefulWidget {
   const SearchPrediction({super.key});
 
@@ -74,29 +73,43 @@ class SsearchPredictionState extends State<SearchPrediction> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: searchResults.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(searchResults[index]['nameofuser'] ?? ''),
-                      subtitle: Text(searchResults[index]['username'] ?? ''),
-                      leading: CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 255, 0, 85),
-                        backgroundImage: NetworkImage(
-                          searchResults[index]['profilePicture'] ?? '',
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: ListTile(
+                        title: Text(searchResults[index]['nameofuser'] ?? ''),
+                        subtitle: Text(searchResults[index]['username'] ?? ''),
+                        leading: CircleAvatar(
+                          backgroundColor: Color.fromARGB(255, 255, 0, 85),
+                          backgroundImage: (searchResults[index]
+                                          ['profilePicture']
+                                      .toString() !=
+                                  'YOUR_DEFAULT_AVATAR_URL')
+                              ? NetworkImage(
+                                  searchResults[index]['profilePicture'] ?? '',
+                                )
+                              : null,
                         ),
+                        onTap: () {
+                          var searchAccountUsername =
+                              searchResults[index]['username'].toString();
+                          FocusScope.of(context).unfocus();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SearchAccount(
+                                searchAccountUsername: searchAccountUsername,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      onTap: () {
-                        var searchAccountUsername = searchResults[index]['username'].toString();
-                        FocusScope.of(context).unfocus();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchAccount(searchAccountUsername: searchAccountUsername,),
-                          ),
-                        );
-                      },
                     );
                   },
                 ),

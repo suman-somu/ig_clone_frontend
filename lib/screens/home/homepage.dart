@@ -5,7 +5,7 @@ import 'package:instgram_clone/screens/profilepage.dart';
 import 'package:instgram_clone/screens/search/searchscreen.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, Key? k});
+   HomePage({super.key, Key? k});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_currentIndex],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          // Set the desired height of the bottom navigation bar
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           canvasColor: Colors.white,
@@ -79,6 +78,10 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      //other params
+
+    
+
     );
   }
 }

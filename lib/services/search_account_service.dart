@@ -40,3 +40,38 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
   };
   return profile;
 }
+
+FollowAccount (String searchAccountUsername) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var username = prefs.getString('username');
+  var accessToken = prefs.getString('accessToken');
+
+  var uri = Uri.http(url!, 'api/user/search/account', {
+    'username': username,
+    'accessToken': accessToken,
+    'searchAccountUsername': searchAccountUsername,
+  });
+  var response = await http.put(uri);
+
+  var responseBody = jsonDecode(response.body);
+  print(responseBody);
+
+}
+
+//write a unfollow account function
+UnfollowAccount (String searchAccountUsername) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  var username = prefs.getString('username');
+  var accessToken = prefs.getString('accessToken');
+
+  var uri = Uri.http(url!, 'api/user/search/account', {
+    'username': username,
+    'accessToken': accessToken,
+    'searchAccountUsername': searchAccountUsername,
+  });
+  var response = await http.delete(uri);
+
+  var responseBody = jsonDecode(response.body);
+  print(responseBody);
+
+}

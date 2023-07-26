@@ -94,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           'Search',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: Colors.grey,
                           ),
                         ),
