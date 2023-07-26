@@ -35,6 +35,7 @@ class SearchAccountState extends State<SearchAccount> {
   Widget build(BuildContext context) {
     var itemCount = 10;
     return Animate(
+      delay: const Duration(milliseconds: 0),
       effects: const [
         FadeEffect(duration: Duration(milliseconds: 300)),
         SlideEffect(
@@ -203,7 +204,7 @@ class SearchAccountState extends State<SearchAccount> {
                                       ),
                                     ],
                                   )
-                                      .animate(delay: Duration(milliseconds: 0))
+                                      .animate(delay: const Duration(milliseconds: 0))
                                       .slideY(
                                           duration:
                                               const Duration(milliseconds: 200),
