@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/settings.dart';
+import 'package:instgram_clone/services/appwrite_image_preview.dart';
 import 'package:instgram_clone/services/profile_service.dart';
-
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -22,8 +23,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-
     callprofileservice();
+    // appwriteImagePreview();
   }
 
   callprofileservice() async {
@@ -41,8 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    var itemCount = 10;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -165,15 +164,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                     ),
-                    itemCount: itemCount,
+                    itemCount: postsidlist.split(',').length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        color: Colors.amber,
-                        // child: Image.asset(
-                        //   'assets/images/image_$index.png',
-                        //   fit: BoxFit.cover,
-                        // ),
-                      );
+                      List<dynamic> parsedList;
+                      List<String> postsidlistStrings = [""];
+                      if (postsidlist.isNotEmpty) {
+                        parsedList = json.decode(postsidlist);
+                        postsidlistStrings =
+                            parsedList.map((id) => id.toString()).toList();
+                      }
+                      var postId = postsidlistStrings[index];
+                      return appwriteImage(postId);
                     },
                   ),
                 ],

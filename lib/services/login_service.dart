@@ -16,10 +16,15 @@ void signupService(String username, String email, String password) async {
 
 Future<http.Response> login(String userid, String password) async {
 
+  print("login service called");
+  print("userid = $userid");
+  print("password = $password");
+
   var uri = Uri.http(url!, 'api/user/login');
+  print("debug 1");
   var response = (isEmail(userid))? await http.post(uri, body: {'email': userid, 'password': password}) :
       await http.post(uri, body: {'username': userid, 'password': password});
-
+  print("debug 2");
   if (response.statusCode == 200) {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var responseBody = json.decode(response.body);
@@ -29,7 +34,7 @@ Future<http.Response> login(String userid, String password) async {
     prefs.setString('username', user);
     prefs.setString('accessToken', accessToken);
   }
-
+  print("debug 3");
   return response;
 }
 
