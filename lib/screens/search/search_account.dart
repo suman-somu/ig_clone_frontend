@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:instgram_clone/services/search_account_service.dart';
+
+import '../../services/appwrite_image_preview.dart';
 
 class SearchAccount extends StatefulWidget {
   final String searchAccountUsername;
@@ -295,25 +299,29 @@ class SearchAccountState extends State<SearchAccount> {
                       height: 20,
                     ),
                     GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                      ),
-                      itemCount: itemCount,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          color: Colors.amber,
-                          // child: Image.asset(
-                          //   'assets/images/image_$index.png',
-                          //   fit: BoxFit.cover,
-                          // ),
-                        );
-                      },
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
                     ),
+                    itemCount: (postsidlist!="[]")?postsidlist.split(',').length:0,
+                    itemBuilder: (context, index) {
+                      List<dynamic> parsedList;
+                      List<String> postsidlistStrings = [""];
+                      if (postsidlist.isNotEmpty) {
+                        print("list is not empty");
+                        parsedList = json.decode(postsidlist);
+                        postsidlistStrings =
+                            parsedList.map((id) => id.toString()).toList();
+                      }
+                      print("list is empty");
+                      var postId = postsidlistStrings[index];
+                      return appwriteImage(postId);
+                    },
+                  ),
                   ],
                 ),
               ],
