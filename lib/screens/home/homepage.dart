@@ -66,8 +66,8 @@ class _HomePageState extends State<HomePage> {
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_outlined),
-              activeIcon: Icon(Icons.notifications),
+              icon: Icon(Icons.favorite_border),
+              activeIcon: Icon(Icons.favorite),
               label: '',
             ),
             BottomNavigationBarItem(
