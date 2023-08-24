@@ -59,6 +59,9 @@ class _HomeFeedState extends State<HomeFeed> {
             ),
           ],
         ),
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
+        shadowColor: Colors.grey,
       ),
       body: FutureBuilder<List<Feed>>(
         future: _getHomeFeed(),

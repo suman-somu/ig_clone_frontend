@@ -79,10 +79,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      //other params
-
-    
-
     );
   }
 }
