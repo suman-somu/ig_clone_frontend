@@ -11,7 +11,7 @@ Future<String> getPostDetailsForAUser(String postid) async {
     var username = prefs.getString('username');
     var accessToken = prefs.getString('accessToken');
 
-    var uri = Uri.http(url!, 'api/user/getuserpostdetails');
+    var uri = Uri.http(url!, 'api/user/getpostdetails');
     var response = await http.get(uri, headers: {
       'username': username!,
       'accesstoken': accessToken!,

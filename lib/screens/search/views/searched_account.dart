@@ -308,21 +308,14 @@ class SearchAccountState extends State<SearchAccount> {
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
                       ),
-                      itemCount: (postsidlist.isEmpty)
+                      itemCount: (postsidlist.isNotEmpty)
                           ? postsidlist.split(',').length
                           : 0,
                       itemBuilder: (context, index) {
-                        List<dynamic> parsedList;
-                        List<String> postsidlistStrings = [""];
-                        if (postsidlist.isNotEmpty) {
-                          parsedList = json.decode(postsidlist);
-                          postsidlistStrings =
-                              parsedList.map((id) => id.toString()).toList();
-                        }
-                        var postId = postsidlistStrings[index];
                         var postID = postsidlist.split(',');
-                        print("to pass the id = "+postsidlist);
-                        return appwriteImage(postId);
+                        // print("indexvalue = ${index}");
+                        // print("postID[index] = ${postID[index]}");
+                        return appwriteImage(postID[index]);
                       },
                     ),
                   ],
@@ -332,13 +325,7 @@ class SearchAccountState extends State<SearchAccount> {
           ),
         ),
       ),
-    )
-        // .animate().slideX(
-        //       duration: const Duration(milliseconds: 300),
-        //       begin: 5.0,
-        //       end: 0.0,
-        //     )
-        ;
+    );
   }
 
   void getProfileDetails() async {
@@ -353,7 +340,10 @@ class SearchAccountState extends State<SearchAccount> {
       // postsidlist = profile['postsidlist']!;
       postsidlist = profile['postsidlist']!.substring(1,profile['postsidlist']!.length-1);
 
-      print("returned list: " + postsidlist);
+      print("returned list: &" + postsidlist+"&");
+      // var postID = postsidlist.split(',')[0];
+      // print(postID);
+      // print(postsidlist.isEmpty);
     });
   }
 }

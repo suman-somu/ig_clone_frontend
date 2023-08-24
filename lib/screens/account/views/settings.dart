@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../auth/services/login_service.dart';
 import '../../auth/views/loginscreen.dart';
-import '../../search/views/searchscreen.dart';
+import '../../search/views/explore.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

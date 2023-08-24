@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/search/views/search_account.dart';
+import 'package:instgram_clone/screens/search/views/searched_account.dart';
 import 'package:instgram_clone/screens/search/services/search_prediction_service.dart';
 
 class SearchPrediction extends StatefulWidget {
