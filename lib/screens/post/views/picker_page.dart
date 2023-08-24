@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:insta_assets_picker/insta_assets_picker.dart';
-import 'package:instgram_clone/services/post_service.dart';
+import 'package:instgram_clone/screens/post/services/post_service.dart';
 
-import '../widgets/cropresultsview.dart';
-import 'home/homepage.dart';
+import '../../../utils/widgets/cropresultsview.dart';
+import '../../homepage.dart';
 
 class PickerPage extends StatefulWidget {
   const PickerPage({super.key});

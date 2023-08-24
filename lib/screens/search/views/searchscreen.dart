@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/search/search_predictions.dart';
+
+import 'search_predictions.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
         List<String> newImages = List.generate(
           21,
           (index) =>
-              'https://img.freepik.com/free-photo/blossom-floral-bouquet-decoration-colorful-beautiful-flowers-background-garden-flowers-plant-pattern-wallpapers-greeting-cards-postcards-design-wedding-invites_90220-1103.jpg',
+          'https://public.bnbstatic.com/static/academy/uploads-original/0ee9d7d59d424a7c8bd7d70c86070beb.png'
         );
 
         setState(() {

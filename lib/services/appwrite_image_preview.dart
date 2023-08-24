@@ -47,6 +47,6 @@ Widget appwriteImage(String postid) {
 }
 
 Future<String> getFileId(String postid) async {
-  var result = await getPostDetails(postid); // Assuming this function returns the fileid as a String
+  var result = await getPostDetailsForAUser(postid); // Assuming this function returns the fileid as a String
   return result;
 }

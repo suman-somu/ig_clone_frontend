@@ -19,6 +19,7 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
 
   var responseBody = jsonDecode(response.body);
 
+
   var nameofuser = responseBody['data']['nameofuser'];
   var searchedUsername = responseBody['data']['username'];
   var profilepicture = responseBody['data']['profilePicture'];

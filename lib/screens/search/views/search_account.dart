@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:instgram_clone/services/search_account_service.dart';
+import 'package:instgram_clone/screens/search/services/search_account_service.dart';
 
-import '../../services/appwrite_image_preview.dart';
+import '../../../services/appwrite_image_preview.dart';
 
 class SearchAccount extends StatefulWidget {
   final String searchAccountUsername;
@@ -37,7 +37,6 @@ class SearchAccountState extends State<SearchAccount> {
 
   @override
   Widget build(BuildContext context) {
-    var itemCount = 10;
     return Animate(
       delay: const Duration(milliseconds: 0),
       effects: const [
@@ -190,8 +189,8 @@ class SearchAccountState extends State<SearchAccount> {
                                       TextButton(
                                         onPressed: () {
                                           (userIsFollowing)
-                                              ? UnfollowAccount('emiwaybantai')
-                                              : FollowAccount('emiwaybantai');
+                                              ? UnfollowAccount('sam')
+                                              : FollowAccount('sam');
                                           Navigator.pop(context);
                                           setState(() {
                                             userIsFollowing = !userIsFollowing;
@@ -208,12 +207,14 @@ class SearchAccountState extends State<SearchAccount> {
                                       ),
                                     ],
                                   )
-                                      .animate(delay: const Duration(milliseconds: 0))
+                                      .animate(
+                                          delay:
+                                              const Duration(milliseconds: 0))
                                       .slideY(
                                           duration:
-                                              const Duration(milliseconds: 200),
-                                          begin: 3.0,
-                                          end: 0.0);
+                                              const Duration(milliseconds: 50),
+                                          begin: -0.2,
+                                          end: -0.4);
                                 },
                               );
                             },
@@ -299,29 +300,31 @@ class SearchAccountState extends State<SearchAccount> {
                       height: 20,
                     ),
                     GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: (postsidlist.isEmpty)
+                          ? postsidlist.split(',').length
+                          : 0,
+                      itemBuilder: (context, index) {
+                        List<dynamic> parsedList;
+                        List<String> postsidlistStrings = [""];
+                        if (postsidlist.isNotEmpty) {
+                          parsedList = json.decode(postsidlist);
+                          postsidlistStrings =
+                              parsedList.map((id) => id.toString()).toList();
+                        }
+                        var postId = postsidlistStrings[index];
+                        var postID = postsidlist.split(',');
+                        print("to pass the id = "+postsidlist);
+                        return appwriteImage(postId);
+                      },
                     ),
-                    itemCount: (postsidlist!="[]")?postsidlist.split(',').length:0,
-                    itemBuilder: (context, index) {
-                      List<dynamic> parsedList;
-                      List<String> postsidlistStrings = [""];
-                      if (postsidlist.isNotEmpty) {
-                        print("list is not empty");
-                        parsedList = json.decode(postsidlist);
-                        postsidlistStrings =
-                            parsedList.map((id) => id.toString()).toList();
-                      }
-                      print("list is empty");
-                      var postId = postsidlistStrings[index];
-                      return appwriteImage(postId);
-                    },
-                  ),
                   ],
                 ),
               ],
@@ -347,7 +350,10 @@ class SearchAccountState extends State<SearchAccount> {
       followerscount = profile['followerscount'].toString();
       followingcount = profile['followingcount'].toString();
       bio = profile['bio'].toString();
-      postsidlist = profile['postsidlist'].toString();
+      // postsidlist = profile['postsidlist']!;
+      postsidlist = profile['postsidlist']!.substring(1,profile['postsidlist']!.length-1);
+
+      print("returned list: " + postsidlist);
     });
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/loginscreen.dart';
-import 'package:instgram_clone/screens/search/searchscreen.dart';
 
-import '../services/login_service.dart';
+import '../../auth/services/login_service.dart';
+import '../../auth/views/loginscreen.dart';
+import '../../search/views/searchscreen.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

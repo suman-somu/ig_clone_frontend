@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/services/appwrite_image_preview.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
-import '../models/FeedModel.dart';
+import '../../models/FeedModel.dart';
 
 class PostWidget extends StatefulWidget {
   final Feed feed;
@@ -37,7 +38,7 @@ class _PostWidgetState extends State<PostWidget> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Text(
-                    widget.feed.username,
+                    widget.feed.username!,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -59,10 +60,13 @@ class _PostWidgetState extends State<PostWidget> {
             child: AspectRatio(
               aspectRatio: 4 / 5,
               child: Image.asset(
-                widget.feed.image,
+                widget.feed.image!,
                 fit: BoxFit.cover,
               ),
+              // child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7"),
             ),
+          //   child: SizedBox(
+          //     height: 100,child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7")),
           ),
           const SizedBox(height: 5.0),
           Row(
