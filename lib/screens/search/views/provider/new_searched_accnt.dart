@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:instgram_clone/screens/search/accountSchedule.dart';
 import 'package:provider/provider.dart';
 
-import '../../../services/appwrite_image_preview.dart';
+import '../../../../services/appwrite_image_preview.dart';
 
 class searchAccnt extends StatelessWidget {
   const searchAccnt({super.key});

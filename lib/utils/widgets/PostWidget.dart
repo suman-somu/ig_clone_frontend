@@ -59,11 +59,11 @@ class _PostWidgetState extends State<PostWidget> {
             onScaleStop: () {},
             child: AspectRatio(
               aspectRatio: 4 / 5,
-              child: Image.asset(
-                widget.feed.image!,
-                fit: BoxFit.cover,
-              ),
-              // child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7"),
+              // child: Image.asset(
+              //   widget.feed.image!,
+              //   fit: BoxFit.cover,
+              // ),
+              child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7"),
             ),
           //   child: SizedBox(
           //     height: 100,child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7")),

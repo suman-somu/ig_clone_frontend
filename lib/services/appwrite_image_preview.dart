@@ -19,7 +19,7 @@ Widget appwriteImage(String postid) {
       } else if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}');
       } else if (snapshot.hasData) {
-        String fileid = snapshot.data!; // Get the fileid as a String
+        String fileid = snapshot.data!;
         print("fileid = ${fileid}");
         var fid = fileid.substring(1, fileid.length - 1);
         return FutureBuilder(

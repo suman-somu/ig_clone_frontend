@@ -51,9 +51,7 @@ Future<Map<String, dynamic>> getPostDetails(String postid) async {
     var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      // print("received successfully");
       print("This is the decoded response body = ${responseBody}");
-      // print("this is the filepath = ${responseBody['postdetails']['filepath']}");
       return responseBody['postdetails'];
     } else {
       print('Request failed with status: ${response.statusCode}');
