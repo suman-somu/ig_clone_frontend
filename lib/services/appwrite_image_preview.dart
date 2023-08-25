@@ -33,8 +33,13 @@ Widget appwriteImage(String postid) {
                 ? Image.memory(
                     snapshot.data!,
                   )
-                : const CircularProgressIndicator(
-                    color: Colors.black,
+                : const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                        color: Colors.black,
+                    ),
+                  ],
                 );
           },
         );

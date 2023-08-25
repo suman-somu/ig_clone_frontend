@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/screens/account/views/help.dart';
 
 import '../../auth/services/login_service.dart';
 import '../../auth/views/loginscreen.dart';
 import '../../search/views/explore.dart';
+import 'about.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -24,7 +26,10 @@ class SettingsPage extends StatelessWidget {
             ),
             title: const Text('Search'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> const SearchScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SearchScreen()));
             },
           ),
           ListTile(
@@ -39,25 +44,12 @@ class SettingsPage extends StatelessWidget {
             leading: SizedBox(
                 height: 30,
                 width: 30,
-                child: Image.asset('assets/images/privacy.png')),
-            title: const Text('Privacy'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: SizedBox(
-                height: 30,
-                width: 30,
-                child: Image.asset('assets/images/ads.png')),
-            title: const Text('Ads'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: SizedBox(
-                height: 30,
-                width: 30,
                 child: Image.asset('assets/images/help.png')),
             title: const Text('Help'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HelpPage()));
+            },
           ),
           ListTile(
             leading: SizedBox(
@@ -65,7 +57,10 @@ class SettingsPage extends StatelessWidget {
                 width: 30,
                 child: Image.asset('assets/images/about.png')),
             title: const Text('About'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutPage()));
+            },
           ),
           ListTile(
             leading: SizedBox(
@@ -76,11 +71,8 @@ class SettingsPage extends StatelessWidget {
             onTap: () async {
               await logout();
               Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: ( context) =>
-                                  const LoginScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
           ),
         ],

@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:instgram_clone/screens/search/services/search_account_service.dart';
 
 import '../../../services/appwrite_image_preview.dart';
@@ -25,7 +22,6 @@ class SearchAccountState extends State<SearchAccount> {
   var followingcount = '';
   var bio = '';
   var postsidlist = '';
-
   var userIsFollowing = false;
 
   @override
@@ -189,8 +185,8 @@ class SearchAccountState extends State<SearchAccount> {
                                       TextButton(
                                         onPressed: () {
                                           (userIsFollowing)
-                                              ? UnfollowAccount('sam')
-                                              : FollowAccount('sam');
+                                              ? UnfollowAccount(widget.searchAccountUsername)
+                                              : FollowAccount(widget.searchAccountUsername);
                                           Navigator.pop(context);
                                           setState(() {
                                             userIsFollowing = !userIsFollowing;
@@ -337,13 +333,9 @@ class SearchAccountState extends State<SearchAccount> {
       followerscount = profile['followerscount'].toString();
       followingcount = profile['followingcount'].toString();
       bio = profile['bio'].toString();
-      // postsidlist = profile['postsidlist']!;
       postsidlist = profile['postsidlist']!.substring(1,profile['postsidlist']!.length-1);
+      userIsFollowing = profile['userIsFollowing'] == 'true' ? true : false;
 
-      print("returned list: &" + postsidlist+"&");
-      // var postID = postsidlist.split(',')[0];
-      // print(postID);
-      // print(postsidlist.isEmpty);
     });
   }
 }

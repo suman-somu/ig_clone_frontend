@@ -45,10 +45,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
       Future.delayed(const Duration(seconds: 2), () {
         List<String> newImages = List.generate(
-          21,
-          (index) =>
-          'https://public.bnbstatic.com/static/academy/uploads-original/0ee9d7d59d424a7c8bd7d70c86070beb.png'
-        );
+            21,
+            (index) =>
+                'https://public.bnbstatic.com/static/academy/uploads-original/0ee9d7d59d424a7c8bd7d70c86070beb.png');
 
         setState(() {
           _isLoading = false;
@@ -121,10 +120,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       fit: BoxFit.cover,
                     );
                   } else if (_isLoading) {
-                    return const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
                       ),
                     );
                   } else {

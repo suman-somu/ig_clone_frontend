@@ -26,6 +26,7 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
   var noofposts = responseBody['data']['posts'].length.toString();
   var followerscount = responseBody['data']['followers'].length.toString();
   var followingcount = responseBody['data']['following'].length.toString();
+  var userIsFollowing = responseBody['data']['followers'].contains(username);
   var bio = responseBody['data']['bio'];
   var postsidlist = responseBody['data']['posts'];
 
@@ -38,6 +39,7 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
     'followingcount': followingcount.toString(),
     'bio': (bio ?? '').toString(),
     'postsidlist': (postsidlist ?? []).toString(),
+    'userIsFollowing': userIsFollowing.toString(),
   };
   return profile;
 }
