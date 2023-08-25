@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:instgram_clone/services/get_post_details.dart';
+import 'package:instgram_clone/services/get_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,8 +46,7 @@ Future<List<Feed>> getHomeFeed() async {
     var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      print("received successfully");
-      print("This is the postidlist = ${responseBody['data']['postidlist']}");
+      print("feed received");
 
       List<Feed> feedList = [];
 
@@ -58,10 +57,6 @@ Future<List<Feed>> getHomeFeed() async {
           Feed feed = Feed.fromJson(postdetails);
           feedList.add(feed);
         }
-      }
-      print("This is the feedList:");
-      for (var feed in feedList) {
-        print(feed);
       }
       return feedList;
     } else {

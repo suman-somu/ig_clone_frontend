@@ -5,26 +5,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 var url = dotenv.env['URL'];
 
-Future<String> getPostDetailsForAUser(String postid) async {
+Future<String> getFileId(String postid) async {
   try {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var username = prefs.getString('username');
-    var accessToken = prefs.getString('accessToken');
-
-    var uri = Uri.http(url!, 'api/user/getpostdetails');
+    var uri = Uri.http(url!, 'api/user/getfileid');
     var response = await http.get(uri, headers: {
-      'username': username!,
-      'accesstoken': accessToken!,
       'pid': postid,
     });
-
     var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      // print("received successfully");
-      // print("This is the decoded response body = ${responseBody}");
-      // print("this is the filepath = ${responseBody['postdetails']['filepath']}");
-      return responseBody['postdetails']['filepath'].toString();
+      return responseBody['fileid'];
     } else {
       print('Request failed with status: ${response.statusCode}');
     }
@@ -51,7 +41,6 @@ Future<Map<String, dynamic>> getPostDetails(String postid) async {
     var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      print("This is the decoded response body = ${responseBody}");
       return responseBody['postdetails'];
     } else {
       print('Request failed with status: ${response.statusCode}');

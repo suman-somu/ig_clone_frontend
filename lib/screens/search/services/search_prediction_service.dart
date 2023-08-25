@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 var url = dotenv.env['URL'];
 
 Future<List<dynamic>> searchPredictionService(String keywords) async {
   try {
-    var uri = Uri.http(url!, 'api/user/search', {'keywords': keywords});
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var uri = Uri.http(url!, 'api/user/search', {'keywords': keywords,
+    'currentusername': prefs.getString('username')!});
     var response = await http.get(uri);
 
     if (response.statusCode == 200) {
