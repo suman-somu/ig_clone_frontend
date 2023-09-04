@@ -22,10 +22,10 @@ class _HomeFeedState extends State<HomeFeed> {
 
   void _onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
     setState(() {
-      _getHomeFeed(); // Call the feed service
+      _getHomeFeed();
     });
+    refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
