@@ -16,7 +16,7 @@ Future<String> getFileId(String postid) async {
     if (response.statusCode == 200) {
       return responseBody['fileid'];
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      print('Request failed in getFileId with status: ${response.statusCode}');
     }
     return "";
   } catch (e) {
@@ -43,7 +43,7 @@ Future<Map<String, dynamic>> getPostDetails(String postid) async {
     if (response.statusCode == 200) {
       return responseBody['postdetails'];
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      print('Request failed in getPostDetails with status: ${response.statusCode}');
     }
     return {};
   } catch (e) {

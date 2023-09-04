@@ -58,9 +58,11 @@ Future<List<Feed>> getHomeFeed() async {
           feedList.add(feed);
         }
       }
+      print("feed success");
+      print(feedList);
       return feedList;
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      print('Request failed in getHomeFeed with status: ${response.statusCode}');
     }
     return [];
   } catch (e) {

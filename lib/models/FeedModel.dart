@@ -4,6 +4,7 @@ class Feed {
   final int? likes;
   final int? comments;
   final String? caption;
+  final String? postid;
 
   Feed({
     this.username,
@@ -11,6 +12,7 @@ class Feed {
     this.likes,
     this.comments,
     this.caption,
+    this.postid,
   });
 
     @override
@@ -24,6 +26,7 @@ class Feed {
     likes: json['likes']?.length ?? 0,
     comments: json['comments']?.length ?? 0,
     caption: json['caption'] ?? 'No caption', // Provide a default value for null caption
+    postid: json['postid'].toString(), // Provide a default value for null postid
   );
   }
 }

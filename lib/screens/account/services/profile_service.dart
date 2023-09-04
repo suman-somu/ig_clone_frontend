@@ -43,7 +43,7 @@ Future<Map<String, String>> profileservice() async {
 
       return profile;
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      print('Request failed in profileservice with status: ${response.statusCode}');
       return {};
     }
   } catch (e) {

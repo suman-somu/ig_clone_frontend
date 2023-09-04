@@ -22,7 +22,7 @@ Future<List<dynamic>> searchPredictionService(String keywords) async {
         return accounts;
       }
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      print('Request failed in searchPredictionService with status: ${response.statusCode}');
     }
   } catch (e) {
     print(e);
