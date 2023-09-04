@@ -8,7 +8,7 @@
     <application
         android:label="instgram_clone"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/images">
         <activity
             android:name=".MainActivity"
             android:exported="true"
