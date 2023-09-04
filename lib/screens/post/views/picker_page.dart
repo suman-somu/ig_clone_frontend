@@ -28,7 +28,7 @@ class _PickerPageState extends State<PickerPage> {
     super.dispose();
   }
 
-   @override
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -72,6 +72,9 @@ class _PickerPageState extends State<PickerPage> {
         );
       },
     );
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomePage()));
   }
 
   @override
@@ -169,11 +172,8 @@ class PickerCaptionScreen extends StatelessWidget {
             onPressed: () async {
               await postImageEvent(croppedFiles, captionController);
               Navigator.popUntil(context, (route) => route.isFirst);
-                  Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: ( context) =>
-                                   HomePage()));
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
             },
           ),
         ],
@@ -258,8 +258,9 @@ class PickerCaptionScreen extends StatelessWidget {
       ),
     );
   }
-  
-  Future<void> postImageEvent(List<File> imagelist, TextEditingController caption) async {
+
+  Future<void> postImageEvent(
+      List<File> imagelist, TextEditingController caption) async {
     postImage(imagelist, caption.text);
   }
 }
