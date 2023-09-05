@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 var url = dotenv.env['URL'];
 
-Future<String> getFileId(String postid) async {
+Future<List<String>> getFileId(String postid) async {
   try {
     var uri = Uri.http(url!, 'api/user/getfileid');
     var response = await http.get(uri, headers: {
@@ -14,14 +14,15 @@ Future<String> getFileId(String postid) async {
     var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      return responseBody['fileid'];
+      List<String> fileIds = (responseBody['fileid'] as List<dynamic>).map((item) => item.toString()).toList();
+      return fileIds;
     } else {
       print('Request failed in getFileId with status: ${response.statusCode}');
     }
-    return "";
+    return [""];
   } catch (e) {
     print('Error: $e');
-    return "";
+    return [""];
   }
 }
 
