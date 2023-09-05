@@ -3,7 +3,7 @@ import 'package:instgram_clone/screens/mesages/messages_page.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import '../../../models/FeedModel.dart';
 import '../services/feed_service.dart';
-import '../../../utils/widgets/PostWidget.dart';
+import 'PostWidget.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({Key? key});

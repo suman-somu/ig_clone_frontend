@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:instgram_clone/screens/search/services/search_account_service.dart';
-
-import '../../../services/appwrite_image_preview.dart';
+import 'package:instgram_clone/services/account_posts_appwrite_service.dart';
 
 class SearchAccount extends StatefulWidget {
   final String searchAccountUsername;
@@ -311,7 +310,7 @@ class SearchAccountState extends State<SearchAccount> {
                         var postID = postsidlist.split(',');
                         // print("indexvalue = ${index}");
                         // print("postID[index] = ${postID[index]}");
-                        return appwriteImage(postID[index]);
+                        return accountPosts(postID[index]);
                       },
                     ),
                   ],

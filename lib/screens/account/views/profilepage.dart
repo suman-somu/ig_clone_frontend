@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/account/services/profile_posts_appwrite_service.dart';
+import 'package:instgram_clone/services/account_posts_appwrite_service.dart';
 import 'package:instgram_clone/screens/account/views/settings.dart';
 import 'package:instgram_clone/screens/account/services/profile_service.dart';
 
@@ -174,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             parsedList.map((id) => id.toString()).toList();
                       }
                       var postId = postsidlistStrings[index];
-                      return profilePosts(postId);
+                      return accountPosts(postId);
                     },
                   ),
                 ],

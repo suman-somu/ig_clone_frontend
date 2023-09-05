@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/services/appwrite_image_preview.dart';
-import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
+import 'package:instgram_clone/screens/feed/services/post_images_preview.dart';
 
-import '../../models/FeedModel.dart';
+import '../../../models/FeedModel.dart';
 
 class PostWidget extends StatefulWidget {
   final Feed feed;
@@ -49,25 +48,7 @@ class _PostWidgetState extends State<PostWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          ZoomOverlay(
-            minScale: 0.8,
-            animationCurve: Curves.fastOutSlowIn,
-            animationDuration: const Duration(milliseconds: 300),
-            modalBarrierColor: Colors.black.withOpacity(0.5),
-            twoTouchOnly: true,
-            onScaleStart: () {},
-            onScaleStop: () {},
-            child: AspectRatio(
-              aspectRatio: 4 / 5,
-              // child: Image.asset(
-              //   widget.feed.image!,
-              //   fit: BoxFit.cover,
-              // ),
-              child: appwriteImage(widget.feed.postid!),
-            ),
-          //   child: SizedBox(
-          //     height: 100,child: appwriteImage("7abdf3841c768bdd99e3a3dd12e726d7")),
-          ),
+          postImagesPreview(widget.feed.postid!),
           const SizedBox(height: 5.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,

@@ -44,6 +44,7 @@ dependencies:
   flutter_animate: ^4.2.0+1
   appwrite: ^9.0.1
   provider: ^6.0.5
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

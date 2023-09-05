@@ -1,9 +1,9 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:instgram_clone/services/get_details.dart';
+import 'package:instgram_clone/screens/feed/services/get_details.dart';
 
-Widget profilePosts(String postid) {
+Widget accountPosts(String postid) {
   Client client = Client();
   Storage storage = Storage(client);
 
