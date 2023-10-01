@@ -15,8 +15,6 @@ A clone of the popular social media platform Instagram, built with Flutter and N
 
 ## Demo
 
-[Link to Live Demo](#) *(If applicable)*
-
 ![Demo Screenshot](link-to-demo-screenshot.png)
 
 ## Features
