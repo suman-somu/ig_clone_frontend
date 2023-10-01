@@ -1,7 +1,54 @@
-# instgram_clone
+# Instagram Clone
 
-I tried to make a clone of Instagramm. The functionality includes signing an account, posting, feed and follow accounts.
+![Project Logo](link-to-your-logo-or-image.png)
 
-The backend is written in javascript using express framework. Backend repo link - [link](https://github.com/suman-somu/instgram-clone-backend)
+A clone of the popular social media platform Instagram, built with Flutter and NodeJS. This project aims to replicate the core features of Instagram, allowing users to share photos, follow other users, and interact with posts.
 
-I have used monogoDB as the database and Appwrite storage for storing media. 
+## Table of Contents
+
+- [Demo](#demo)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+
+
+## Demo
+
+[Link to Live Demo](#) *(If applicable)*
+
+![Demo Screenshot](link-to-demo-screenshot.png)
+
+## Features
+
+- User authentication and registration
+- Posting photos with captions
+- Following and unfollowing other users
+- Liking and commenting on posts
+- User profiles with followers and following lists
+- Activity feed with posts from followed users
+- Notifications for likes, comments, and follows
+- Edit and delete posts
+
+## Getting Started
+
+### Prerequisites
+
+- Flutter
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/instagram-clone.git
+   ```
+2. Install the dependencies
+   ```bash
+   flutter pub get
+   ```
+1. Run:
+
+   ```bash
+   flutter run
+   ```
