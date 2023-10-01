@@ -1,7 +1,4 @@
 # Instagram Clone
-
-![Project Logo](link-to-your-logo-or-image.png)
-
 A clone of the popular social media platform Instagram, built with Flutter and NodeJS. This project aims to replicate the core features of Instagram, allowing users to share photos, follow other users, and interact with posts.
 
 ## Table of Contents
