@@ -48,7 +48,17 @@ class _PostWidgetState extends State<PostWidget> {
             ),
           ),
           const SizedBox(height: 8.0),
-          postImagesPreview(widget.feed.postid!),
+          GestureDetector(
+            onDoubleTap: () => {
+              setState(() {
+                if (selected) {
+                  selected = false;
+                } else {
+                  selected = true;
+                }
+              })
+            },
+            child: postImagesPreview(widget.feed.postid!)),
           const SizedBox(height: 5.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
