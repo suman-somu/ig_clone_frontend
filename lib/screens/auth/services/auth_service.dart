@@ -6,12 +6,20 @@ import '../../../utils/is_email.dart';
 
 var url = dotenv.env['URL'];
 
-void signupService(String username, String email, String password) async {
+void signup(String fullname, String username, String email, String password,
+    String birthday) async {
+
   var uri = Uri.http(url!, 'api/user/signup');
-  var response = await http.post(uri,
-      body: {'username': username, 'email': email, 'password': password});
+  var response = await http.post(uri, body: {
+    'nameofuser': fullname,
+    'username': username,
+    'email': email,
+    'password': password,
+    'birthday': birthday,
+  });
   print('Response status: ${response.statusCode}');
   print('Response body: ${response.body}');
+
 }
 
 Future<http.Response> login(String userid, String password) async {

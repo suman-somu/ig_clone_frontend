@@ -1,5 +1,8 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../services/auth_service.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -12,6 +15,13 @@ class _SignupPageState extends State<SignupPage> {
   List<DateTime?> _dates = [
     DateTime.now(),
   ];
+
+  TextEditingController _nameofuserController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +38,14 @@ class _SignupPageState extends State<SignupPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                enabled: true,
+                key: _formKey,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+                controller: _nameofuserController,
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                   labelText: "Full Name",
@@ -58,6 +75,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
+                controller: _usernameController,
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                   labelText: "Username",
@@ -87,6 +105,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
+                controller: _emailController,
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                   labelText: "Email",
@@ -116,6 +135,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20.0),
               TextFormField(
+                controller: _passwordController,
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                   labelText: "Password",
@@ -196,7 +216,16 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 10.0),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  String formattedDate =
+                      DateFormat('yyyy-MM-dd').format(_dates[0]!).toString();
+                  signup(
+                      _nameofuserController.text,
+                      _usernameController.text,
+                      _emailController.text,
+                      _passwordController.text,
+                      formattedDate);
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: const Color(0xFF0064E0),
