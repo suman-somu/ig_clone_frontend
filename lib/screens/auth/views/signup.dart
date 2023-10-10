@@ -1,5 +1,6 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/const.dart';
 import 'package:intl/intl.dart';
 
 import '../services/auth_service.dart';
@@ -228,9 +229,9 @@ class _SignupPageState extends State<SignupPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: const Color(0xFF0064E0),
+                  backgroundColor: primaryColor,
                   disabledBackgroundColor: Colors.white,
-                  disabledForegroundColor: const Color(0xFF0064E0),
+                  disabledForegroundColor: primaryColor,
                   elevation: 1,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
