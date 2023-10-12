@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'predictions.dart';
 
@@ -11,7 +12,8 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final ScrollController _scrollController = ScrollController();
-  final List<String> _imageList = []; // List of images
+  final List<String> _imageList = [];
+
   bool _isLoading = false;
 
   @override
@@ -43,7 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
         _isLoading = true;
       });
 
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 1), () {
         List<String> newImages = List.generate(
             21,
             (index) =>
@@ -55,6 +57,20 @@ class _SearchScreenState extends State<SearchScreen> {
         });
       });
     }
+  }
+
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+
+    //TODO: change this to refresh explore page with new suggested images
+    setState(() {
+      _imageList.clear();
+    });
+
+    _loadImages();
+    refreshController.refreshCompleted();
   }
 
   @override
@@ -105,30 +121,35 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                controller: _scrollController,
-                itemCount: _imageList.length + 1,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 1.0,
-                  crossAxisSpacing: 1.0,
+              child: SmartRefresher(
+                controller: refreshController,
+                enablePullDown: true,
+                onRefresh: _onRefresh,
+                child: GridView.builder(
+                  controller: _scrollController,
+                  itemCount: _imageList.length + 1,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 1.0,
+                    crossAxisSpacing: 1.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    if (index < _imageList.length) {
+                      return Image.network(
+                        _imageList[index],
+                        fit: BoxFit.cover,
+                      );
+                    } else if (_isLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
                 ),
-                itemBuilder: (context, index) {
-                  if (index < _imageList.length) {
-                    return Image.network(
-                      _imageList[index],
-                      fit: BoxFit.cover,
-                    );
-                  } else if (_isLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
               ),
             ),
           ],

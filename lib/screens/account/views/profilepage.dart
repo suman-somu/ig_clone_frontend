@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/services/account_posts_appwrite_service.dart';
 import 'package:instgram_clone/screens/account/views/settings.dart';
 import 'package:instgram_clone/screens/account/services/profile_service.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -24,7 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     callprofileservice();
-    // appwriteImagePreview();
   }
 
   callprofileservice() async {
@@ -40,146 +40,159 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    callprofileservice();
+    refreshController.refreshCompleted();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          (nameofuser == '') ? '...' : nameofuser,
-          style: const TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
+    return SmartRefresher(
+      controller: refreshController,
+      enablePullDown: true,
+      onRefresh: _onRefresh,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            (nameofuser == '') ? '...' : nameofuser,
+            style: const TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.menu),
+              iconSize: 30,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()));
+              },
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 30,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SettingsPage()));
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage:
-                            AssetImage('assets/images/profileimage.png'),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            (noofposts == '') ? '-1' : noofposts.toString(),
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          radius: 50.0,
+                          backgroundImage:
+                              AssetImage('assets/images/profileimage.png'),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              (noofposts == '') ? '-1' : noofposts.toString(),
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          const Text('Posts'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            (followerscount == '')
-                                ? '-1'
-                                : followerscount.toString(),
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
+                            const Text('Posts'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              (followerscount == '')
+                                  ? '-1'
+                                  : followerscount.toString(),
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          const Text('Followers'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            (followingcount == '')
-                                ? '-1'
-                                : followingcount.toString(),
-                            style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
+                            const Text('Followers'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              (followingcount == '')
+                                  ? '-1'
+                                  : followingcount.toString(),
+                              style: const TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          const Text('Following'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Photographer | Traveller',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey,
+                            const Text('Following'),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    (bio == '') ? 'THERE IS NO BIO' : bio,
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const Divider(
-                    height: 0,
-                    // thickness: 0.5,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
+                    const SizedBox(
+                      height: 20,
                     ),
-                    itemCount: postsidlist.split(',').length,
-                    itemBuilder: (context, index) {
-                      List<dynamic> parsedList;
-                      List<String> postsidlistStrings = [""];
-                      if (postsidlist.isNotEmpty) {
-                        parsedList = json.decode(postsidlist);
-                        postsidlistStrings =
-                            parsedList.map((id) => id.toString()).toList();
-                      }
-                      var postId = postsidlistStrings[index];
-                      return accountPosts(postId);
-                    },
-                  ),
-                ],
-              ),
-            ],
+                    const Text(
+                      'Photographer | Traveller',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      (bio == '') ? 'THERE IS NO BIO' : bio,
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const Divider(
+                      height: 0,
+                      // thickness: 0.5,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: postsidlist.split(',').length,
+                      itemBuilder: (context, index) {
+                        List<dynamic> parsedList;
+                        List<String> postsidlistStrings = [""];
+                        if (postsidlist.isNotEmpty) {
+                          parsedList = json.decode(postsidlist);
+                          postsidlistStrings =
+                              parsedList.map((id) => id.toString()).toList();
+                        }
+                        var postId = postsidlistStrings[index];
+                        return accountPosts(postId);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
