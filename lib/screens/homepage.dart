@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/post/views/picker_page.dart';
-import 'package:instgram_clone/screens/feed/views/homefeed.dart';
+import 'package:instgram_clone/screens/feed/views/home_feed.dart';
 import 'package:instgram_clone/screens/account/views/profilepage.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import 'search/views/explore.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key, Key? k});
+  const HomePage({super.key, Key? k});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({Key? key});
+  const NotificationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

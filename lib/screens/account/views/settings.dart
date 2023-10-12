@@ -47,8 +47,8 @@ class SettingsPage extends StatelessWidget {
                 child: Image.asset('assets/images/help.png')),
             title: const Text('Help'),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HelpPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HelpPage()));
             },
           ),
           ListTile(
@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
             title: const Text('About'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AboutPage()));
+                  MaterialPageRoute(builder: (context) => const AboutPage()));
             },
           ),
           ListTile(
@@ -70,9 +70,13 @@ class SettingsPage extends StatelessWidget {
             title: const Text('Log Out'),
             onTap: () async {
               await logout();
-              Navigator.popUntil(context, (route) => route.isFirst);
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              if (context.mounted) {
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
+              }
             },
           ),
         ],

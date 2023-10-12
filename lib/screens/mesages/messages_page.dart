@@ -8,16 +8,19 @@ void main() {
 }
 
 class MessagesPage extends StatelessWidget {
+  MessagesPage({super.key});
+
   final List<ChatPreview> chatPreviews = [
     ChatPreview(username: 'user1', lastMessage: 'Hello!', profileImage: 'assets/user1.jpg'),
     ChatPreview(username: 'user2', lastMessage: 'Hi there!', profileImage: 'assets/user2.jpg'),
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text('Direct')),
+        title: const Center(child: Text('Direct')),
         shadowColor: Colors.black,
         surfaceTintColor: Colors.white,
         leading: IconButton(

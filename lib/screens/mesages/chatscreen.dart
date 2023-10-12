@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class ChatScreen extends StatefulWidget {
   final String username;
 
-  ChatScreen({required this.username});
+  const ChatScreen({super.key, required this.username});
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
@@ -39,12 +39,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   title: Align(
                     alignment: messages[index].startsWith(widget.username) ? Alignment.centerLeft : Alignment.centerRight,
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: messages[index].startsWith(widget.username) ? Colors.grey[300] : Colors.blue,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text(messages[index], style: TextStyle(color: Colors.white)),
+                      child: Text(messages[index], style: const TextStyle(color: Colors.white)),
                     ),
                   ),
                 );
@@ -52,17 +52,17 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(hintText: 'Type a message...'),
+                    decoration: const InputDecoration(hintText: 'Type a message...'),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     _sendMessage(_messageController.text);
                   },

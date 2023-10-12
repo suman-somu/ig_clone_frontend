@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) =>  HomePage(),
+            builder: (BuildContext context) =>  const HomePage(),
           ),
         );
       }
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (BuildContext context) =>  HomePage(),
+                                builder: (BuildContext context) =>  const HomePage(),
                               ),
                             );
                           } else {
@@ -125,8 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  "${response.body}",
-                                  style: TextStyle(color: Colors.white),
+                                  response.body,
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                                 backgroundColor: Colors.black87,
                               ),

@@ -3,15 +3,15 @@ import 'package:instgram_clone/screens/feed/views/dummy_post.dart';
 import 'package:instgram_clone/screens/mesages/messages_page.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../../models/FeedModel.dart';
+import '../../../models/feed_model.dart';
 import '../services/feed_service.dart';
-import 'PostWidget.dart';
+import 'post_widget.dart';
 
 class HomeFeed extends StatefulWidget {
   const HomeFeed({super.key});
 
   @override
-  _HomeFeedState createState() => _HomeFeedState();
+  State<HomeFeed> createState() => _HomeFeedState();
 }
 
 class _HomeFeedState extends State<HomeFeed> {

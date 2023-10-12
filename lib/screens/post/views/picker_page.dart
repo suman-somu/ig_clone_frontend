@@ -72,9 +72,11 @@ class _PickerPageState extends State<PickerPage> {
         );
       },
     );
-    Navigator.popUntil(context, (route) => route.isFirst);
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+    if (context.mounted) {
+      Navigator.popUntil(context, (route) => route.isFirst);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
+    }
   }
 
   @override
@@ -90,7 +92,7 @@ class PickerCropResultScreen extends StatefulWidget {
   final Stream<InstaAssetsExportDetails> cropStream;
 
   @override
-  _PickerCropResultScreenState createState() => _PickerCropResultScreenState();
+  State<PickerCropResultScreen> createState() => _PickerCropResultScreenState();
 }
 
 class _PickerCropResultScreenState extends State<PickerCropResultScreen> {
@@ -171,9 +173,11 @@ class PickerCaptionScreen extends StatelessWidget {
             ),
             onPressed: () async {
               await postImageEvent(croppedFiles, captionController);
-              Navigator.popUntil(context, (route) => route.isFirst);
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
+              if (context.mounted) {
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
+              }
             },
           ),
         ],

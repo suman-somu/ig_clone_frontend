@@ -19,7 +19,6 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
 
   var responseBody = jsonDecode(response.body);
 
-
   var nameofuser = responseBody['data']['nameofuser'];
   var searchedUsername = responseBody['data']['username'];
   var profilepicture = responseBody['data']['profilePicture'];
@@ -44,7 +43,7 @@ Future<Map<String, String>> searchAccount(String searchAccountUsername) async {
   return profile;
 }
 
-FollowAccount (String searchAccountUsername) async {
+followAccount(String searchAccountUsername) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   var username = prefs.getString('username');
   var accessToken = prefs.getString('accessToken');
@@ -58,11 +57,10 @@ FollowAccount (String searchAccountUsername) async {
 
   var responseBody = jsonDecode(response.body);
   print(responseBody);
-
 }
 
 //write a unfollow account function
-UnfollowAccount (String searchAccountUsername) async {
+unfollowAccount(String searchAccountUsername) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   var username = prefs.getString('username');
   var accessToken = prefs.getString('accessToken');
@@ -76,5 +74,4 @@ UnfollowAccount (String searchAccountUsername) async {
 
   var responseBody = jsonDecode(response.body);
   print(responseBody);
-
 }

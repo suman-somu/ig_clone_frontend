@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 50.0,
                           backgroundImage:
                               AssetImage('assets/images/profileimage.png'),

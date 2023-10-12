@@ -10,8 +10,8 @@ class SearchPrediction extends StatefulWidget {
 }
 
 class SsearchPredictionState extends State<SearchPrediction> {
-  late FocusNode _focusNode = FocusNode();
-  TextEditingController SearchPredictionKeywords = TextEditingController();
+  late final FocusNode _focusNode = FocusNode();
+  TextEditingController searchPredictionKeywords = TextEditingController();
 
   List<Map<String, String>> searchResults = [];
 
@@ -50,7 +50,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
                   const SizedBox(width: 20),
                   Expanded(
                     child: TextField(
-                      controller: SearchPredictionKeywords,
+                      controller: searchPredictionKeywords,
                       autofocus: true, // Automatically open the keyboard
                       focusNode: _focusNode,
                       onChanged: (text) {
@@ -87,7 +87,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
                         title: Text(searchResults[index]['nameofuser'] ?? ''),
                         subtitle: Text(searchResults[index]['username'] ?? ''),
                         leading: CircleAvatar(
-                          backgroundColor: Color.fromARGB(255, 255, 0, 85),
+                          backgroundColor: const Color.fromARGB(255, 255, 0, 85),
                           backgroundImage: (searchResults[index]
                                           ['profilePicture']
                                       .toString() !=
@@ -123,7 +123,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
   }
 
   Future<void> updatelist() async {
-    String text = SearchPredictionKeywords.text.trim();
+    String text = searchPredictionKeywords.text.trim();
     if (text.isNotEmpty) {
       var results = await searchPredictionService(text);
       print("Results = $results");

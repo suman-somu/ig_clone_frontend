@@ -5,7 +5,7 @@ import 'package:instgram_clone/screens/feed/services/get_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../models/FeedModel.dart';
+import '../../../models/feed_model.dart';
 
 var url = dotenv.env['URL'];
 

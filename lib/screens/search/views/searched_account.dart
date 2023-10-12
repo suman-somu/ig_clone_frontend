@@ -84,7 +84,7 @@ class SearchAccountState extends State<SearchAccount> {
                         children: [
                           CircleAvatar(
                             radius: 50.0,
-                            backgroundColor: Color.fromARGB(255, 255, 0, 85),
+                            backgroundColor: const Color.fromARGB(255, 255, 0, 85),
                             backgroundImage:
                                 (profilepicture != 'YOUR_DEFAULT_AVATAR_URL')
                                     ? NetworkImage(
@@ -198,9 +198,9 @@ class SearchAccountState extends State<SearchAccount> {
                                         TextButton(
                                           onPressed: () {
                                             (userIsFollowing)
-                                                ? UnfollowAccount(widget
+                                                ? unfollowAccount(widget
                                                     .searchAccountUsername)
-                                                : FollowAccount(widget
+                                                : followAccount(widget
                                                     .searchAccountUsername);
                                             Navigator.pop(context);
                                             setState(() {

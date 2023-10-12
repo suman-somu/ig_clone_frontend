@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/feed/services/post_images_preview.dart';
 
-import '../../../models/FeedModel.dart';
+import '../../../models/feed_model.dart';
 
 class PostWidget extends StatefulWidget {
   final Feed feed;

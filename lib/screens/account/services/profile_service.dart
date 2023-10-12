@@ -38,9 +38,6 @@ Future<Map<String, String>> profileservice() async {
         'postsidlist': postsidlist.toString(),
       };
 
-      //print postidlistr
-      // print("This is the postids= ${postsidlist[1].runtimeType}");
-
       return profile;
     } else {
       print('Request failed in profileservice with status: ${response.statusCode}');
