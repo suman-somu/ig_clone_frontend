@@ -15,7 +15,6 @@ class HomeFeed extends StatefulWidget {
 }
 
 class _HomeFeedState extends State<HomeFeed> {
-  final _hasGotFeed = true;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -77,48 +76,42 @@ class _HomeFeedState extends State<HomeFeed> {
         backgroundColor: Colors.white,
         shadowColor: Colors.grey,
       ),
-      body: Skeletonizer(
-        ignoreContainers: true,
-        enabled: !_hasGotFeed,
-        child: FutureBuilder<List<Feed>>(
-          future: _getHomeFeed(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else {
-              List<Feed> posts = snapshot.data!;
-      
-              return (_hasGotFeed)
-                  ? SmartRefresher(
-                      controller: refreshController,
-                      enablePullDown: true,
-                      enablePullUp: true,
-                      onRefresh: _onRefresh,
-                      onLoading: _onLoading,
-                      child: ListView.builder(
-                        itemCount: posts.length,
-                        itemBuilder: (context, index) {
-                          return PostWidget(feed: posts[index]);
-                        },
-                      ),
-                    )
-                  : const DummyPost();
-            }
-          },
-        ),
+      body: FutureBuilder<List<Feed>>(
+        future: _getHomeFeed(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Skeletonizer(
+              ignoreContainers: true,
+              enabled: true,
+              child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return const DummyPost();
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            List<Feed> posts = snapshot.data!;
+
+            return SmartRefresher(
+              controller: refreshController,
+              enablePullDown: true,
+              enablePullUp: true,
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
+              child: ListView.builder(
+                itemCount: posts.length,
+                itemBuilder: (context, index) {
+                  return PostWidget(feed: posts[index]);
+                },
+              ),
+            );
+          }
+        },
       ),
     );
   }
