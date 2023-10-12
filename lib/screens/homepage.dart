@@ -30,13 +30,7 @@ class _HomePageState extends State<HomePage> {
       // body: _pages[_currentIndex],
       body: LazyLoadIndexedStack(
         index: _currentIndex,
-        children: const <Widget>[
-          HomeFeed(),
-          SearchScreen(),
-          PickerPage(),
-          NotificationsScreen(),
-          ProfilePage(),
-        ],
+        children: _pages,
       ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
