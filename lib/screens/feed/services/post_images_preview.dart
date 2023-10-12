@@ -18,7 +18,25 @@ Widget postImagesPreview(String postid) {
         postid), // Wait for getFileId() to complete and get the fileid as a String
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const CircularProgressIndicator();
+        return CarouselSlider(
+          options: CarouselOptions(
+            padEnds: false,
+            enableInfiniteScroll: false,
+            enlargeFactor: 1,
+            viewportFraction: 1,
+            aspectRatio: 1 / 1,
+          ),
+          items: const[
+             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ]
+        );
       } else if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}');
       } else if (snapshot.hasData) {

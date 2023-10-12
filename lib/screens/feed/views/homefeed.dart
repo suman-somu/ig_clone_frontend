@@ -85,7 +85,14 @@ class _HomeFeedState extends State<HomeFeed> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
               );
             } else if (snapshot.hasError) {
               return Center(
