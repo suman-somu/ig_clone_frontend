@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:instgram_clone/screens/post/views/picker_page.dart';
 import 'package:instgram_clone/screens/feed/views/homefeed.dart';
 import 'package:instgram_clone/screens/account/views/profilepage.dart';
+import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import 'search/views/explore.dart';
 
 class HomePage extends StatefulWidget {
-   HomePage({super.key, Key? k});
+  HomePage({super.key, Key? k});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -26,7 +27,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      // body: _pages[_currentIndex],
+      body: LazyLoadIndexedStack(
+        index: _currentIndex,
+        children: const <Widget>[
+          HomeFeed(),
+          SearchScreen(),
+          PickerPage(),
+          NotificationsScreen(),
+          ProfilePage(),
+        ],
+      ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           splashColor: Colors.transparent,

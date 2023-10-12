@@ -48,6 +48,7 @@ dependencies:
   skeletonizer: ^0.7.0
   calendar_date_picker2: ^0.5.3
   intl: ^0.18.1
+  lazy_load_indexed_stack: ^1.0.1
 
 dev_dependencies:
   flutter_test:
