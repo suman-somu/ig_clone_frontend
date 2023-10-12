@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:instgram_clone/screens/feed/services/get_details.dart';
-import 'package:instgram_clone/screens/feed/views/dummy_image.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
@@ -20,10 +19,24 @@ Widget postImagesPreview(String postid) {
         postid), // Wait for getFileId() to complete and get the fileid as a String
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Skeletonizer(
-          ignoreContainers: true,
-          enabled: true,
-          child: DummyImage(),
+        return CarouselSlider(
+          options: CarouselOptions(
+            padEnds: false,
+            enableInfiniteScroll: false,
+            enlargeFactor: 1,
+            viewportFraction: 1,
+            aspectRatio: 1 / 1,
+          ),
+          items: const[
+             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ]
         );
       } else if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}');
