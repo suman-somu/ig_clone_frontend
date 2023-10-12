@@ -56,29 +56,36 @@ class _HomePageState extends State<HomePage> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
+          items: [
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined, color: Colors.black,),
+              activeIcon: Icon(Icons.home, color: Colors.black,),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: SizedBox(
+                width: 24,
+                height: 24,
+                child: Image.asset('assets/images/searchbutton.png')),
+              activeIcon: SizedBox(
+                width: 24,
+                height: 24,
+                child: Image.asset('assets/images/searchbuttonselected.png')),
               label: '',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined),
-              activeIcon: Icon(Icons.add_box),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined, color: Colors.black,),
+              activeIcon: Icon(Icons.add_box, color: Colors.black,),
               label: '',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              activeIcon: Icon(Icons.favorite),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border,color: Colors.black,),
+              activeIcon: Icon(Icons.favorite, color: Colors.black,),
               label: '',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_outlined),
-              activeIcon: Icon(Icons.person_2),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_outlined, color: Colors.black,),
+              activeIcon: Icon(Icons.person_2, color: Colors.black,),
               label: '',
             ),
           ],
