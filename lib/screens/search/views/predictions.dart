@@ -56,6 +56,7 @@ class SsearchPredictionState extends State<SearchPrediction> {
                       onChanged: (text) {
                         updatelist();
                       },
+                      cursorColor: Colors.black,
                       decoration: InputDecoration(
                         hintText: 'Search',
                         prefixIcon: const Icon(Icons.search),

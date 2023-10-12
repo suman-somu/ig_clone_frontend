@@ -140,7 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         fit: BoxFit.cover,
                       );
                     } else if (_isLoading) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.black,
                         ),
