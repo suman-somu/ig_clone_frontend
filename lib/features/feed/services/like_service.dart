@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +17,6 @@ void likeUnlike(String postid) async {
       'accesstoken': accessToken!,
       'postid': postid,
     });
-
-    var responseBody = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
       print("successful");
