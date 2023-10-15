@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instgram_clone/features/feed/services/like_service.dart';
 import 'package:instgram_clone/features/feed/services/post_images_preview.dart';
 
 import '../../../models/feed_model.dart';
@@ -13,6 +14,10 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
+  bool checkLike() {
+    return false;
+  }
+
   bool selected = false;
 
   @override
@@ -49,22 +54,24 @@ class _PostWidgetState extends State<PostWidget> {
           ),
           const SizedBox(height: 8.0),
           GestureDetector(
-            onDoubleTap: () => {
-              setState(() {
-                if (selected) {
-                  selected = false;
-                } else {
-                  selected = true;
-                }
-              })
-            },
-            child: postImagesPreview(widget.feed.postid!)),
+              onDoubleTap: () => {
+                    setState(() {
+                      if (selected) {
+                        selected = false;
+                      } else {
+                        selected = true;
+                      }
+                    })
+                  },
+              child: postImagesPreview(widget.feed.postid!)),
           const SizedBox(height: 5.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 onPressed: () {
+                  likeUnlike(widget.feed.postid!);
+
                   setState(() {
                     if (selected) {
                       selected = false;
