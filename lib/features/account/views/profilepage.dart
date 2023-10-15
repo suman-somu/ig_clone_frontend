@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/services/account_posts_appwrite_service.dart';
-import 'package:instgram_clone/screens/account/views/settings.dart';
-import 'package:instgram_clone/screens/account/services/profile_service.dart';
+import 'package:instgram_clone/features/account/views/settings.dart';
+import 'package:instgram_clone/features/account/services/profile_service.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class ProfilePage extends StatefulWidget {

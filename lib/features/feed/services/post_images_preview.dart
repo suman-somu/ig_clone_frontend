@@ -2,7 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:instgram_clone/screens/feed/services/get_details.dart';
+import 'package:instgram_clone/features/feed/services/get_details.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 Widget postImagesPreview(String postid) {

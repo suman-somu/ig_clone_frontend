@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:instgram_clone/screens/search/services/search_account_service.dart';
+import 'package:instgram_clone/features/search/services/search_account_service.dart';
 import 'package:instgram_clone/services/account_posts_appwrite_service.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 

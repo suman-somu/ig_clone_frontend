@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:insta_assets_picker/insta_assets_picker.dart';
-import 'package:instgram_clone/screens/post/services/post_service.dart';
+import 'package:instgram_clone/features/post/services/post_service.dart';
 
 import '../../../utils/widgets/cropresultsview.dart';
 import '../../homepage.dart';

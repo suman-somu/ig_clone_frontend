@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'screens/auth/views/loginscreen.dart';
+import 'features/auth/views/loginscreen.dart';
 
 
 Future<void> main() async {

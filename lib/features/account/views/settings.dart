@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/account/views/help.dart';
+import 'package:instgram_clone/features/account/views/help.dart';
 
 import '../../auth/services/auth_service.dart';
 import '../../auth/views/loginscreen.dart';

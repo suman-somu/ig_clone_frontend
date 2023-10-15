@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:instgram_clone/screens/feed/services/get_details.dart';
+import 'package:instgram_clone/features/feed/services/get_details.dart';
 
 Widget accountPosts(String postid) {
   Client client = Client();

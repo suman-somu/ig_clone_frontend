@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/feed/views/dummy_post.dart';
-import 'package:instgram_clone/screens/mesages/messages_page.dart';
+import 'package:instgram_clone/features/feed/views/dummy_post.dart';
+import 'package:instgram_clone/features/mesages/messages_page.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../models/feed_model.dart';

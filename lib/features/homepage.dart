@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/post/views/picker_page.dart';
-import 'package:instgram_clone/screens/feed/views/home_feed.dart';
-import 'package:instgram_clone/screens/account/views/profilepage.dart';
+import 'package:instgram_clone/features/post/views/picker_page.dart';
+import 'package:instgram_clone/features/feed/views/home_feed.dart';
+import 'package:instgram_clone/features/account/views/profilepage.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import 'search/views/explore.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instgram_clone/screens/auth/views/signup.dart';
-import 'package:instgram_clone/screens/homepage.dart';
+import 'package:instgram_clone/features/auth/views/signup.dart';
+import 'package:instgram_clone/features/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/auth_service.dart';
