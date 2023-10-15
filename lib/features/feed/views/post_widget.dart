@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instgram_clone/features/feed/services/like_service.dart';
 import 'package:instgram_clone/features/feed/services/post_images_preview.dart';
+import 'package:instgram_clone/features/feed/widgets/like_animation.dart';
 
 import '../../../models/feed_model.dart';
 
@@ -17,6 +18,8 @@ class _PostWidgetState extends State<PostWidget> {
   bool checkLike() {
     return false;
   }
+
+  bool isLikeAnimating = false;
 
   late bool hasLiked;
   late int likes;
@@ -62,29 +65,62 @@ class _PostWidgetState extends State<PostWidget> {
           ),
           const SizedBox(height: 8.0),
           GestureDetector(
-              onDoubleTap: () => {
-                    setState(() {
-                      hasLiked = !hasLiked;
-                      likes = (hasLiked) ? likes + 1 : likes - 1;
-                    })
-                  },
-              child: postImagesPreview(widget.feed.postid!)),
+            onDoubleTap: () => {
+              likeUnlike(widget.feed.postid!),
+              setState(() {
+                isLikeAnimating = true;
+                if (!hasLiked) {
+                  hasLiked = !hasLiked;
+                  likes = (hasLiked) ? likes + 1 : likes - 1;
+                }
+              })
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                postImagesPreview(widget.feed.postid!),
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isLikeAnimating ? 1 : 0,
+                  child: LikeAnimation(
+                    isAnimating: isLikeAnimating,
+                    duration: const Duration(milliseconds: 200),
+                    onEnd: () {
+                      setState(() {
+                        isLikeAnimating = false;
+                      });
+                    },
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.redAccent,
+                      size: 120,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
           const SizedBox(height: 5.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              IconButton(
-                onPressed: () {
-                  likeUnlike(widget.feed.postid!);
-                  setState(() {
-                    hasLiked = !hasLiked;
-                    likes = (hasLiked) ? likes + 1 : likes - 1;
-                  });
-                },
-                isSelected: hasLiked,
-                icon: const Icon(Icons.favorite_border),
-                selectedIcon: const Icon(Icons.favorite),
-                color: (hasLiked) ? Colors.redAccent : Colors.black,
+              LikeAnimation(
+                duration: const Duration(milliseconds: 100),
+                isAnimating: isLikeAnimating,
+                child: IconButton(
+                  onPressed: () {
+                    isLikeAnimating = true;
+                    likeUnlike(widget.feed.postid!);
+                    setState(() {
+                      hasLiked = !hasLiked;
+                      likes = (hasLiked) ? likes + 1 : likes - 1;
+                    });
+                  },
+                  isSelected: hasLiked,
+                  icon: const Icon(Icons.favorite_border),
+                  selectedIcon: const Icon(Icons.favorite),
+                  color: (hasLiked) ? Colors.redAccent : Colors.black,
+                ),
               ),
               IconButton(
                 onPressed: () {},
