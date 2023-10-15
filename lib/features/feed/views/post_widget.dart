@@ -18,7 +18,15 @@ class _PostWidgetState extends State<PostWidget> {
     return false;
   }
 
-  bool selected = false;
+  late bool hasLiked;
+  late int likes;
+
+  @override
+  void initState() {
+    hasLiked = widget.feed.hasLiked;
+    likes = widget.feed.likes ?? 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +64,8 @@ class _PostWidgetState extends State<PostWidget> {
           GestureDetector(
               onDoubleTap: () => {
                     setState(() {
-                      if (selected) {
-                        selected = false;
-                      } else {
-                        selected = true;
-                      }
+                      hasLiked = !hasLiked;
+                      likes = (hasLiked) ? likes + 1 : likes - 1;
                     })
                   },
               child: postImagesPreview(widget.feed.postid!)),
@@ -71,19 +76,15 @@ class _PostWidgetState extends State<PostWidget> {
               IconButton(
                 onPressed: () {
                   likeUnlike(widget.feed.postid!);
-
                   setState(() {
-                    if (selected) {
-                      selected = false;
-                    } else {
-                      selected = true;
-                    }
+                    hasLiked = !hasLiked;
+                    likes = (hasLiked) ? likes + 1 : likes - 1;
                   });
                 },
-                isSelected: selected,
+                isSelected: hasLiked,
                 icon: const Icon(Icons.favorite_border),
                 selectedIcon: const Icon(Icons.favorite),
-                color: (selected) ? Colors.redAccent : Colors.black,
+                color: (hasLiked) ? Colors.redAccent : Colors.black,
               ),
               IconButton(
                 onPressed: () {},
@@ -101,7 +102,7 @@ class _PostWidgetState extends State<PostWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  widget.feed.likes.toString(),
+                  likes.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

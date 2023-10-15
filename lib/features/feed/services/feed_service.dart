@@ -54,14 +54,23 @@ Future<List<Feed>> getHomeFeed() async {
       for (var postId in responseBody['data']['postidlist']) {
         var postdetails = await getPostDetails(postId.toString());
         if (postdetails.isNotEmpty) {
-          Feed feed = Feed.fromJson(postdetails);
+          Feed feed = Feed(
+            username: postdetails['username'],
+            image: postdetails['filepath'][0],
+            postid: postdetails['postid'].toString(),
+            caption: postdetails['caption'],
+            likes: postdetails['likes'].length,
+            comments: postdetails['comments'].length,
+            hasLiked: postdetails['likes'].contains(username),
+          );
           feedList.add(feed);
         }
       }
       print("feed success");
       return feedList;
     } else {
-      print('Request failed in getHomeFeed with status: ${response.statusCode}');
+      print(
+          'Request failed in getHomeFeed with status: ${response.statusCode}');
     }
     return [];
   } catch (e) {

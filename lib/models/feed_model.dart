@@ -2,6 +2,7 @@ class Feed {
   final String? username;
   final String? image;
   final int? likes;
+  final bool hasLiked;
   final int? comments;
   final String? caption;
   final String? postid;
@@ -10,14 +11,19 @@ class Feed {
     this.username,
     this.image,
     this.likes,
+    this.hasLiked = false,
     this.comments,
     this.caption,
     this.postid,
   });
 
+  set hasLiked(bool value) {
+    hasLiked = value;
+  }
+
     @override
   String toString() {
-    return 'Feed(username: $username, image: $image, likes: $likes, comments: $comments, caption: $caption)';
+    return 'Feed(username: $username, image: $image, likes: $likes, comments: $comments, caption: $caption, postid: $postid, hasLiked: $hasLiked)';
   }
   factory Feed.fromJson(Map<String, dynamic> json) {
   return Feed(
